@@ -1,21 +1,15 @@
 package com.example.newsapp.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ProfileResponse(
-
-	@field:SerializedName("web")
 	val web: String? = null,
-
-	@field:SerializedName("name")
 	val name: String? = null,
-
-	@field:SerializedName("bio")
 	val bio: String? = null,
-
-	@field:SerializedName("picture")
 	val picture: String? = null,
 
-	@field:SerializedName("username")
-	val username: String? = null
+	@SerialName("username")
+	val userName: String? = null
 )
