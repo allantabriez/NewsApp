@@ -1,5 +1,6 @@
 package com.example.newsapp.di
 
+import com.example.newsapp.BuildConfig
 import com.example.newsapp.data.remote.network.ApiService
 import com.example.newsapp.data.remote.network.AuthInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -25,7 +26,7 @@ val networkModule = module {
     }
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://34.121.153.157/")
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
             .client(get())
             .build()

@@ -10,6 +10,9 @@ def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
 def version = [major: 1, minor: 0, patch: 0]
 def buildVersionCode = version.major * 100 + version.minor * 10 + version.patch
 def buildVersionName = version.major + "." + version.minor + "." + version.patch
@@ -23,6 +26,8 @@ android {
         targetSdk 31
         versionCode buildVersionCode
         versionName buildVersionName
+
+        buildConfigField("String", "BASE_URL", localProperties['baseUrl'])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

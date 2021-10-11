@@ -9,7 +9,9 @@ data class TokenResponse(
 	@SerialName("expires_at")
 	val expiresAt: String? = null,
 
+	@SerialName("scheme")
 	val scheme: String? = null,
 
+	@SerialName("token")
 	val token: String? = null
 )
