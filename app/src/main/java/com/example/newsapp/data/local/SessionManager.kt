@@ -30,5 +30,11 @@ class SessionManager(private val context: Context) {
         putString(EXPIRED_AT, expiredAt)
     }
 
+    fun getScheme() = preferences.getString(SCHEME, null)
+
+    fun getToken() = preferences.getString(TOKEN, null)
+
+    fun getExpiredAt() = preferences.getString(EXPIRED_AT, null)
+
     fun deleteSession() = preferences.all.clear()
 }
