@@ -7,17 +7,17 @@ import kotlinx.serialization.Serializable
 data class ProfileResponse(
 
 	@SerialName("web")
-	val web: String? = null,
+	val web: String,
 
 	@SerialName("name")
-	val name: String? = null,
+	val name: String,
 
 	@SerialName("bio")
-	val bio: String? = null,
+	val bio: String,
 
 	@SerialName("picture")
-	val picture: String? = null,
+	val picture: String,
 
 	@SerialName("username")
-	val userName: String? = null
+	val userName: String
 )

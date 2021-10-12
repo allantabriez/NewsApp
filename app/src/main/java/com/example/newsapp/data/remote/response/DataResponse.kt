@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class DataResponse<T>(
     @SerialName("data")
-    val data: T? = null
+    val data: T
 )

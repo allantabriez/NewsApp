@@ -7,11 +7,11 @@ import kotlinx.serialization.Serializable
 data class TokenResponse(
 
 	@SerialName("expires_at")
-	val expiresAt: String? = null,
+	val expiresAt: String,
 
 	@SerialName("scheme")
-	val scheme: String? = null,
+	val scheme: String,
 
 	@SerialName("token")
-	val token: String? = null
+	val token: String
 )

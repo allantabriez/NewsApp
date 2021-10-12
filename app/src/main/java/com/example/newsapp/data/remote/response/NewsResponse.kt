@@ -8,52 +8,52 @@ import kotlinx.serialization.Serializable
 data class NewsResponse(
 
     @SerialName("nsfw")
-    val nsfw: Boolean? = null,
+    val nsfw: Boolean,
 
     @SerialName("channel")
-    val channel: Channel? = null,
+    val channel: Channel,
 
     @SerialName("created_at")
-    val createdAt: String? = null,
+    val createdAt: String,
 
     @SerialName("id")
-    val id: Int? = null,
+    val id: Int,
 
     @SerialName("cover_image")
-    val coverImage: String? = null,
+    val coverImage: String,
 
     @SerialName("counter")
-    val counter: Counter? = null,
+    val counter: Counter,
 
     @SerialName("title")
-    val title: String? = null,
+    val title: String,
 
     @SerialName("url")
-    val url: String? = null
+    val url: String
 )
 
 @Serializable
 data class Counter(
 
     @SerialName("view")
-    val view: Int? = null,
+    val view: Int,
 
     @SerialName("downvote")
-    val downVote: Int? = null,
+    val downVote: Int,
 
     @SerialName("comment")
-    val comment: Int? = null,
+    val comment: Int,
 
     @SerialName("upvote")
-    val upVote: Int? = null
+    val upVote: Int
 )
 
 @Serializable
 data class Channel(
 
     @SerialName("name")
-    val name: String? = null,
+    val name: String,
 
     @SerialName("id")
-    val id: Int? = null
+    val id: Int
 )

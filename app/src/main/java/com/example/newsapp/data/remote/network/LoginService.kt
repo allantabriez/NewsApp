@@ -4,25 +4,21 @@ import com.example.newsapp.data.remote.response.DataResponse
 import com.example.newsapp.data.remote.response.NewsResponse
 import com.example.newsapp.data.remote.response.ProfileResponse
 import com.example.newsapp.data.remote.response.TokenResponse
+import com.example.newsapp.utils.Constants.LOGIN_URL
+import com.example.newsapp.utils.Constants.REFRESH_URL
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.POST
 
-interface ApiService {
+interface LoginService {
 
-    @POST("auth/login")
+    @POST(LOGIN_URL)
     suspend fun doLogin(
         @Field("username") userName: String,
         @Field("password") password: String,
     ): Response<TokenResponse>
 
-    @GET("auth/token")
+    @GET(REFRESH_URL)
     suspend fun refreshToken(): Response<TokenResponse>
-
-    @GET("me/profile")
-    suspend fun getProfile(): Response<ProfileResponse>
-
-    @GET("me/news")
-    suspend fun getNews(): Response<DataResponse<List<NewsResponse>>>
 }
