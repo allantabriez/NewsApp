@@ -2,6 +2,7 @@ package com.example.newsapp
 
 import android.app.Application
 import com.example.newsapp.di.authInterceptModule
+import com.example.newsapp.di.dataSourceModule
 import com.example.newsapp.di.okhttpModule
 import com.example.newsapp.di.retrofitModule
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -17,6 +18,7 @@ class Application: Application() {
             authInterceptModule
             okhttpModule
             retrofitModule
+            dataSourceModule
         }
     }
 }
