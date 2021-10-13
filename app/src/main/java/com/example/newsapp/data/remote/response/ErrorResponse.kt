@@ -1,8 +1,10 @@
 package com.example.newsapp.data.remote.response
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ErrorResponse(
-    val message: String? = null
+    @SerialName("message")
+    val message: String
 )

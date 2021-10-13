@@ -5,11 +5,19 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ProfileResponse(
-	val web: String? = null,
-	val name: String? = null,
-	val bio: String? = null,
-	val picture: String? = null,
+
+	@SerialName("web")
+	val web: String,
+
+	@SerialName("name")
+	val name: String,
+
+	@SerialName("bio")
+	val bio: String,
+
+	@SerialName("picture")
+	val picture: String,
 
 	@SerialName("username")
-	val userName: String? = null
+	val userName: String
 )

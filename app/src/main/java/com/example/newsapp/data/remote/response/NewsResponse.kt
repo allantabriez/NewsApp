@@ -7,40 +7,53 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class NewsResponse(
 
-    val nsfw: Boolean? = null,
+    @SerialName("nsfw")
+    val nsfw: Boolean,
 
-    val channel: Channel? = null,
+    @SerialName("channel")
+    val channel: Channel,
 
     @SerialName("created_at")
-    val createdAt: String? = null,
+    val createdAt: String,
 
-    val id: Int? = null,
+    @SerialName("id")
+    val id: Int,
 
     @SerialName("cover_image")
-    val coverImage: String? = null,
+    val coverImage: String,
 
-    val counter: Counter? = null,
+    @SerialName("counter")
+    val counter: Counter,
 
-    val title: String? = null,
+    @SerialName("title")
+    val title: String,
 
-    val url: String? = null
+    @SerialName("url")
+    val url: String
 )
 
 @Serializable
 data class Counter(
-    val view: Int? = null,
+
+    @SerialName("view")
+    val view: Int,
 
     @SerialName("downvote")
-    val downVote: Int? = null,
+    val downVote: Int,
 
-    val comment: Int? = null,
+    @SerialName("comment")
+    val comment: Int,
 
     @SerialName("upvote")
-    val upVote: Int? = null
+    val upVote: Int
 )
 
 @Serializable
 data class Channel(
-    val name: String? = null,
-    val id: Int? = null
+
+    @SerialName("name")
+    val name: String,
+
+    @SerialName("id")
+    val id: Int
 )
