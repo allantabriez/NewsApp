@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class MeDataSource(
+class MeRemoteDataSource(
     private val meService: MeService,
     private val ioDispatcher: CoroutineDispatcher
 ) {

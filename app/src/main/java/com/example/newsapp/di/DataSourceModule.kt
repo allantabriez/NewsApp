@@ -1,11 +1,11 @@
 package com.example.newsapp.di
 
-import com.example.newsapp.data.remote.LoginDataSource
-import com.example.newsapp.data.remote.MeDataSource
+import com.example.newsapp.data.remote.LoginRemoteDataSource
+import com.example.newsapp.data.remote.MeRemoteDataSource
 import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 
 val dataSourceModule = module {
-    single { LoginDataSource(get(), Dispatchers.IO) }
-    single { MeDataSource(get(), Dispatchers.IO) }
+    single { LoginRemoteDataSource(get(), Dispatchers.IO) }
+    single { MeRemoteDataSource(get(), Dispatchers.IO) }
 }

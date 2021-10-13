@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class LoginDataSource(
+class LoginRemoteDataSource(
     private val loginService: LoginService,
     private val ioDispatcher: CoroutineDispatcher
 ) {
