@@ -4,12 +4,16 @@ import android.content.Context
 import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
+import com.example.newsapp.data.LoginDataSource
+import com.example.newsapp.data.remote.response.TokenResponse
+import com.example.newsapp.utils.Constants.FUNCTION_NOT_USED
+import com.example.newsapp.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
-class SessionManager(private val context: Context) {
+class SessionManager(private val context: Context) : LoginDataSource {
 
     companion object {
         const val TOKEN = "token"
-        const val SCHEME = "scheme"
         const val EXPIRED_AT = "expired_at"
     }
 
@@ -24,17 +28,25 @@ class SessionManager(private val context: Context) {
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
-    fun saveSession(token: String, scheme: String, expiredAt: String) = preferences.edit {
+    override fun saveSession(token: String, expiredAt: String) = preferences.edit {
         putString(TOKEN, token)
-        putString(SCHEME, scheme)
         putString(EXPIRED_AT, expiredAt)
     }
 
-    fun getScheme() = preferences.getString(SCHEME, null)
+    override fun getToken() = preferences.getString(TOKEN, "")!!
 
-    fun getToken() = preferences.getString(TOKEN, null)
+    override fun getExpiredAt() = preferences.getString(EXPIRED_AT, "")!!
 
-    fun getExpiredAt() = preferences.getString(EXPIRED_AT, null)
+    override fun deleteSession() = preferences.all.clear()
 
-    fun deleteSession() = preferences.all.clear()
+
+//    Below are unused functions in this implementation
+
+    override fun doLogin(username: String, pass: String): Flow<Resource<TokenResponse>> {
+        throw Exception(FUNCTION_NOT_USED)
+    }
+
+    override fun refreshToken(): Flow<Resource<TokenResponse>> {
+        throw Exception(FUNCTION_NOT_USED)
+    }
 }

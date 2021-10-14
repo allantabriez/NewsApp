@@ -1,8 +1,7 @@
 package com.example.newsapp.data.remote
 
+import com.example.newsapp.data.LoginDataSource
 import com.example.newsapp.data.remote.network.LoginService
-import com.example.newsapp.data.remote.response.NewsResponse
-import com.example.newsapp.data.remote.response.ProfileResponse
 import com.example.newsapp.data.remote.response.TokenResponse
 import com.example.newsapp.utils.Constants.FUNCTION_NOT_USED
 import com.example.newsapp.utils.DataMapper
@@ -15,7 +14,7 @@ import kotlinx.coroutines.flow.flowOn
 class LoginRemoteDataSource(
     private val loginService: LoginService,
     private val ioDispatcher: CoroutineDispatcher
-): RemoteDataSource {
+): LoginDataSource {
     override fun doLogin(username: String, pass: String): Flow<Resource<TokenResponse>> {
         return flow {
             emit(Resource.Loading())
@@ -34,11 +33,19 @@ class LoginRemoteDataSource(
         }.flowOn(ioDispatcher)
     }
 
-    override fun getNews(): Flow<Resource<List<NewsResponse>>> {
+    override fun saveSession(token: String, expiredAt: String) {
         throw Exception(FUNCTION_NOT_USED)
     }
 
-    override fun getProfile(): Flow<Resource<ProfileResponse>> {
+    override fun getToken(): String {
+        throw Exception(FUNCTION_NOT_USED)
+    }
+
+    override fun getExpiredAt(): String {
+        throw Exception(FUNCTION_NOT_USED)
+    }
+
+    override fun deleteSession() {
         throw Exception(FUNCTION_NOT_USED)
     }
 }
