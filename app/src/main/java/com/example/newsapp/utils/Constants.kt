@@ -8,4 +8,5 @@ object Constants {
     const val JSON_MEDIA_TYPE = "application/json"
     const val BUILD_TYPE_DEBUG = "debug"
     const val FUNCTION_NOT_USED = "This function is not used in this class"
+    const val DB_NAME = "News.db"
 }
