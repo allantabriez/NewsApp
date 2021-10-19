@@ -15,11 +15,15 @@ class Application : Application() {
         startKoin {
             if (BuildConfig.BUILD_TYPE == Constants.BUILD_TYPE_DEBUG) androidLogger()
             androidContext(this@Application)
-            authInterceptModule
-            okhttpModule
-            retrofitModule
-            dataSourceModule
-            roomModule
+            modules(
+                listOf(
+                    authInterceptModule,
+                    okhttpModule,
+                    retrofitModule,
+                    dataSourceModule,
+                    roomModule,
+                )
+            )
         }
     }
 }
