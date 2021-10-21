@@ -8,8 +8,8 @@ import com.example.newsapp.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface MeDataSource {
-    fun getNews(): Flow<Resource<List<NewsResponse>>>
-    fun getProfile(): Flow<Resource<ProfileResponse>>
+    suspend fun getNews(): Resource<List<NewsResponse>>
+    suspend fun getProfile(): Resource<ProfileResponse>
     fun getCachedNews(): Flow<List<NewsEntity>>
     fun getCachedProfile(): Flow<List<ProfileEntity>>
     suspend fun insertNews(news: List<NewsEntity>)

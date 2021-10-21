@@ -7,28 +7,24 @@ import com.example.newsapp.utils.ErrorCode
 import com.example.newsapp.utils.Resource
 import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class LoginRemoteDataSource(
     private val loginService: LoginService,
     private val ioDispatcher: CoroutineDispatcher
 ) : LoginDataSource {
-    override fun doLogin(username: String, pass: String): Flow<Resource<TokenResponse>> {
-        return flow {
+    override suspend fun doLogin(username: String, pass: String): Resource<TokenResponse> =
+        withContext(ioDispatcher) {
             val response = loginService.doLogin(username, pass)
-            if (response.isSuccessful) emit(Resource.Success(response.body() as TokenResponse))
-            else emit(Resource.Error(code = ErrorCode.fromInt(response.code())))
-        }.flowOn(ioDispatcher)
-    }
+            if (response.isSuccessful) return@withContext Resource.Success(response.body() as TokenResponse)
+            else return@withContext Resource.Error(ErrorCode.fromInt(response.code()))
+        }
 
-    override fun refreshToken(): Flow<Resource<TokenResponse>> {
-        return flow {
-            val response = loginService.refreshToken()
-            if (response.isSuccessful) emit(Resource.Success(response.body() as TokenResponse))
-            else emit(Resource.Error(code = ErrorCode.fromInt(response.code())))
-        }.flowOn(ioDispatcher)
+    override suspend fun refreshToken(): Resource<TokenResponse> = withContext(Dispatchers.IO) {
+        val response = loginService.refreshToken()
+        if (response.isSuccessful) return@withContext Resource.Success(response.body() as TokenResponse)
+        else return@withContext Resource.Error(ErrorCode.fromInt(response.code()))
     }
 
     override fun saveSession(token: String, expiredAt: String) {

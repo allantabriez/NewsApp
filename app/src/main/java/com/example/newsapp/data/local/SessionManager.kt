@@ -8,7 +8,6 @@ import com.example.newsapp.data.LoginDataSource
 import com.example.newsapp.data.remote.response.TokenResponse
 import com.example.newsapp.utils.Resource
 import com.example.newsapp.utils.UnusedFunctionException
-import kotlinx.coroutines.flow.Flow
 
 class SessionManager(private val context: Context) : LoginDataSource {
 
@@ -42,11 +41,11 @@ class SessionManager(private val context: Context) : LoginDataSource {
 
 //    Below are unused functions in this implementation
 
-    override fun doLogin(username: String, pass: String): Flow<Resource<TokenResponse>> {
+    override suspend fun doLogin(username: String, pass: String): Resource<TokenResponse> {
         throw UnusedFunctionException()
     }
 
-    override fun refreshToken(): Flow<Resource<TokenResponse>> {
+    override suspend fun refreshToken(): Resource<TokenResponse> {
         throw UnusedFunctionException()
     }
 }

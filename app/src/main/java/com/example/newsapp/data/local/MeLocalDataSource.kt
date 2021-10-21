@@ -10,7 +10,6 @@ import com.example.newsapp.data.remote.response.ProfileResponse
 import com.example.newsapp.utils.Resource
 import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class MeLocalDataSource(
@@ -39,11 +38,11 @@ class MeLocalDataSource(
 
 //    Below are unused functions in this implementation
 
-    override fun getNews(): Flow<Resource<List<NewsResponse>>> {
+    override suspend fun getNews(): Resource<List<NewsResponse>> {
         throw UnusedFunctionException()
     }
 
-    override fun getProfile(): Flow<Resource<ProfileResponse>> {
+    override suspend fun getProfile(): Resource<ProfileResponse> {
         throw UnusedFunctionException()
     }
 }

@@ -11,28 +11,23 @@ import com.example.newsapp.utils.Resource
 import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.withContext
 
 class MeRemoteDataSource(
     private val meService: MeService,
     private val ioDispatcher: CoroutineDispatcher
 ): MeDataSource {
 
-    override fun getNews(): Flow<Resource<List<NewsResponse>>> {
-        return flow {
-            val response = meService.getNews()
-            if (response.isSuccessful) emit(Resource.Success(response.body()?.data as List<NewsResponse>))
-            else emit(Resource.Error(code = ErrorCode.fromInt(response.code())))
-        }.flowOn(ioDispatcher)
+    override suspend fun getNews(): Resource<List<NewsResponse>> = withContext(ioDispatcher) {
+        val response = meService.getNews()
+        if (response.isSuccessful) return@withContext Resource.Success(response.body()?.data as List<NewsResponse>)
+        else return@withContext Resource.Error(ErrorCode.fromInt(response.code()))
     }
 
-    override fun getProfile(): Flow<Resource<ProfileResponse>> {
-        return flow {
-            val response = meService.getProfile()
-            if (response.isSuccessful) emit(Resource.Success(response.body() as ProfileResponse))
-            else emit(Resource.Error(code = ErrorCode.fromInt(response.code())))
-        }.flowOn(ioDispatcher)
+    override suspend fun getProfile(): Resource<ProfileResponse> = withContext(ioDispatcher) {
+        val response = meService.getProfile()
+        if (response.isSuccessful) return@withContext Resource.Success(response.body() as ProfileResponse)
+        else return@withContext Resource.Error(ErrorCode.fromInt(response.code()))
     }
 
 
