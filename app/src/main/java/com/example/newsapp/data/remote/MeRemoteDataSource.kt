@@ -6,7 +6,7 @@ import com.example.newsapp.data.local.entity.ProfileEntity
 import com.example.newsapp.data.remote.network.MeService
 import com.example.newsapp.data.remote.response.NewsResponse
 import com.example.newsapp.data.remote.response.ProfileResponse
-import com.example.newsapp.utils.DataMapper
+import com.example.newsapp.utils.ErrorCode
 import com.example.newsapp.utils.Resource
 import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.coroutines.CoroutineDispatcher
@@ -23,7 +23,7 @@ class MeRemoteDataSource(
         return flow {
             val response = meService.getNews()
             if (response.isSuccessful) emit(Resource.Success(response.body()?.data as List<NewsResponse>))
-            else emit(Resource.Error(DataMapper.mapErrorCode(response.code())))
+            else emit(Resource.Error(code = ErrorCode.fromInt(response.code())))
         }.flowOn(ioDispatcher)
     }
 
@@ -31,7 +31,7 @@ class MeRemoteDataSource(
         return flow {
             val response = meService.getProfile()
             if (response.isSuccessful) emit(Resource.Success(response.body() as ProfileResponse))
-            else emit(Resource.Error(DataMapper.mapErrorCode(response.code())))
+            else emit(Resource.Error(code = ErrorCode.fromInt(response.code())))
         }.flowOn(ioDispatcher)
     }
 
