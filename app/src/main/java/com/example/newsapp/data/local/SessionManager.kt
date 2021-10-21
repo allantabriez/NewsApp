@@ -6,8 +6,8 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.example.newsapp.data.LoginDataSource
 import com.example.newsapp.data.remote.response.TokenResponse
-import com.example.newsapp.utils.Constants.FUNCTION_NOT_USED
 import com.example.newsapp.utils.Resource
+import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.coroutines.flow.Flow
 
 class SessionManager(private val context: Context) : LoginDataSource {
@@ -43,10 +43,10 @@ class SessionManager(private val context: Context) : LoginDataSource {
 //    Below are unused functions in this implementation
 
     override fun doLogin(username: String, pass: String): Flow<Resource<TokenResponse>> {
-        throw Exception(FUNCTION_NOT_USED)
+        throw UnusedFunctionException()
     }
 
     override fun refreshToken(): Flow<Resource<TokenResponse>> {
-        throw Exception(FUNCTION_NOT_USED)
+        throw UnusedFunctionException()
     }
 }

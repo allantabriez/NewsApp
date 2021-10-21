@@ -7,12 +7,11 @@ import com.example.newsapp.data.local.room.NewsDao
 import com.example.newsapp.data.local.room.ProfileDao
 import com.example.newsapp.data.remote.response.NewsResponse
 import com.example.newsapp.data.remote.response.ProfileResponse
-import com.example.newsapp.utils.Constants.FUNCTION_NOT_USED
 import com.example.newsapp.utils.Resource
+import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 class MeLocalDataSource(
     private val newsDao: NewsDao,
@@ -41,10 +40,10 @@ class MeLocalDataSource(
 //    Below are unused functions in this implementation
 
     override fun getNews(): Flow<Resource<List<NewsResponse>>> {
-        throw Exception(FUNCTION_NOT_USED)
+        throw UnusedFunctionException()
     }
 
     override fun getProfile(): Flow<Resource<ProfileResponse>> {
-        throw Exception(FUNCTION_NOT_USED)
+        throw UnusedFunctionException()
     }
 }
