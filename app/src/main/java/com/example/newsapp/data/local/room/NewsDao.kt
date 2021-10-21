@@ -14,7 +14,7 @@ interface NewsDao {
     fun insertNews(news: List<NewsEntity>)
 
     @Query("SELECT * from news_table")
-    fun getNews(): Flow<List<NewsEntity>>
+    fun getNews(): List<NewsEntity>
 
     @Query("DELETE FROM news_table")
     fun deleteNews()

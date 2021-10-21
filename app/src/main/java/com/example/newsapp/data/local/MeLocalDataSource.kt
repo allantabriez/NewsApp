@@ -17,8 +17,13 @@ class MeLocalDataSource(
     private val profileDao: ProfileDao,
     private val ioDispatcher: CoroutineDispatcher
 ) : MeDataSource {
-    override fun getCachedNews() = newsDao.getNews()
-    override fun getCachedProfile() = profileDao.getProfile()
+    override suspend fun getCachedNews() = withContext(ioDispatcher) {
+        return@withContext newsDao.getNews()
+    }
+
+    override suspend fun getCachedProfile() = withContext(ioDispatcher) {
+        return@withContext profileDao.getProfile()
+    }
 
     override suspend fun insertNews(news: List<NewsEntity>) = withContext(ioDispatcher) {
         newsDao.insertNews(news)

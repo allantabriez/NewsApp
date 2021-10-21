@@ -10,7 +10,6 @@ import com.example.newsapp.utils.ErrorCode
 import com.example.newsapp.utils.Resource
 import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class MeRemoteDataSource(
@@ -33,11 +32,11 @@ class MeRemoteDataSource(
 
 //    Below are unused functions in this implementation
 
-    override fun getCachedNews(): Flow<List<NewsEntity>> {
+    override suspend fun getCachedNews(): List<NewsEntity> {
         throw UnusedFunctionException()
     }
 
-    override fun getCachedProfile(): Flow<List<ProfileEntity>> {
+    override suspend fun getCachedProfile(): List<ProfileEntity> {
         throw UnusedFunctionException()
     }
 

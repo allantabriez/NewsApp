@@ -17,5 +17,5 @@ interface ProfileDao {
     fun deleteProfile()
 
     @Query("SELECT * FROM profile_table")
-    fun getProfile(): Flow<List<ProfileEntity>>
+    fun getProfile(): List<ProfileEntity>
 }
