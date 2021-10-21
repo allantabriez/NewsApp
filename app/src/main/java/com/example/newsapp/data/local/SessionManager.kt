@@ -33,9 +33,9 @@ class SessionManager(private val context: Context) : LoginDataSource {
         putString(EXPIRED_AT, expiredAt)
     }
 
-    override fun getToken() = preferences.getString(TOKEN, "")!!
+    override fun getToken() = preferences.getString(TOKEN, "")
 
-    override fun getExpiredAt() = preferences.getString(EXPIRED_AT, "")!!
+    override fun getExpiredAt() = preferences.getString(EXPIRED_AT, "")
 
     override fun deleteSession() = preferences.all.clear()
 
