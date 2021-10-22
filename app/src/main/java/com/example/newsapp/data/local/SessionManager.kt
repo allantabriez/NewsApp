@@ -6,6 +6,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.example.newsapp.data.LoginDataSource
 import com.example.newsapp.data.remote.response.TokenResponse
+import com.example.newsapp.utils.Constants.PREFS_NAME
 import com.example.newsapp.utils.Resource
 import com.example.newsapp.utils.UnusedFunctionException
 
@@ -20,7 +21,7 @@ class SessionManager(private val context: Context) : LoginDataSource {
     private val mainKeyAlias = MasterKeys.getOrCreate(keyGenParameterSpec)
 
     private val preferences = EncryptedSharedPreferences.create(
-        "NEWS_APP",
+        PREFS_NAME,
         mainKeyAlias,
         context,
         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
