@@ -7,7 +7,7 @@ import com.example.newsapp.data.remote.network.MeService
 import com.example.newsapp.data.remote.response.NewsResponse
 import com.example.newsapp.data.remote.response.ProfileResponse
 import com.example.newsapp.utils.ErrorCode
-import com.example.newsapp.utils.Resource
+import com.example.newsapp.utils.NetworkException
 import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -15,18 +15,26 @@ import kotlinx.coroutines.withContext
 class MeRemoteDataSource(
     private val meService: MeService,
     private val ioDispatcher: CoroutineDispatcher
-): MeDataSource {
+) : MeDataSource {
 
-    override suspend fun getNews(): Resource<List<NewsResponse>> = withContext(ioDispatcher) {
-        val response = meService.getNews()
-        if (response.isSuccessful) return@withContext Resource.Success(response.body()?.data as List<NewsResponse>)
-        else return@withContext Resource.Error(ErrorCode.fromInt(response.code()))
+    override suspend fun getNews(): List<NewsResponse> = withContext(ioDispatcher) {
+        try {
+            val response = meService.getNews()
+            if (response.isSuccessful) return@withContext response.body()?.data as List<NewsResponse>
+            else throw NetworkException(response.message(), ErrorCode.fromInt(response.code()))
+        } catch (e: Exception) {
+            throw NetworkException(e.message, ErrorCode.CodeUnknown)
+        }
     }
 
-    override suspend fun getProfile(): Resource<ProfileResponse> = withContext(ioDispatcher) {
-        val response = meService.getProfile()
-        if (response.isSuccessful) return@withContext Resource.Success(response.body() as ProfileResponse)
-        else return@withContext Resource.Error(ErrorCode.fromInt(response.code()))
+    override suspend fun getProfile(): ProfileResponse = withContext(ioDispatcher) {
+        try {
+            val response = meService.getProfile()
+            if (response.isSuccessful) return@withContext response.body() as ProfileResponse
+            else throw NetworkException(response.message(), ErrorCode.fromInt(response.code()))
+        } catch (e: Exception) {
+            throw NetworkException(e.message, ErrorCode.CodeUnknown)
+        }
     }
 
 
