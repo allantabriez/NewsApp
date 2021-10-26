@@ -1,8 +1,7 @@
 package com.example.newsapp.domain.usecase
 
-import com.example.newsapp.domain.model.News
-import com.example.newsapp.utils.Resource
+import com.example.newsapp.domain.repository.MeRepository
 
-interface GetNewsUseCase {
-    suspend fun getNews(): Resource<List<News>>
+class GetNewsUseCase(private val repository: MeRepository) {
+    suspend operator fun invoke() = repository.getNews()
 }

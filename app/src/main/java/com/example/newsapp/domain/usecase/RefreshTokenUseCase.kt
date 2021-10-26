@@ -1,7 +1,7 @@
 package com.example.newsapp.domain.usecase
 
-import com.example.newsapp.utils.Resource
+import com.example.newsapp.domain.repository.LoginRepository
 
-interface RefreshTokenUseCase {
-    suspend fun refreshToken(): Resource<Unit>
+class RefreshTokenUseCase(private val repository: LoginRepository) {
+    suspend operator fun invoke() = repository.refreshToken()
 }

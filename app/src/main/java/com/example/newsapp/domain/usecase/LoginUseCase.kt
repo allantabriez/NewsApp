@@ -1,7 +1,7 @@
 package com.example.newsapp.domain.usecase
 
-import com.example.newsapp.utils.Resource
+import com.example.newsapp.domain.repository.LoginRepository
 
-interface LoginUseCase {
-    suspend fun doLogin(username: String, pass: String): Resource<Unit>
+class LoginUseCase(private val repository: LoginRepository) {
+    suspend operator fun invoke(username: String, pass: String) = repository.doLogin(username, pass)
 }

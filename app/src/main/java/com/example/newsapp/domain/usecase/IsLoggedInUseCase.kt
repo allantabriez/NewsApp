@@ -1,5 +1,7 @@
 package com.example.newsapp.domain.usecase
 
-interface IsLoggedInUseCase {
-    suspend fun isLoggedIn(): Boolean
+import com.example.newsapp.domain.repository.LoginRepository
+
+class IsLoggedInUseCase(private val repository: LoginRepository) {
+    operator fun invoke() = repository.isLoggedIn()
 }
