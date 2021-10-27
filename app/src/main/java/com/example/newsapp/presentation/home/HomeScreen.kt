@@ -90,18 +90,18 @@ fun HomeScreen() {
                     text = "See What's Happening in the World"
                 )
             }
-            items(listOf(1, 2, 3, 4, 5, 6)) { item ->
-                NewsCard(title = item.toString())
+            items(listOf(1, 2, 3, 4, 5, 6)) {
+                NewsCard()
             }
         }
     }
 }
 
-//@ExperimentalCoilApi
-//@Preview(showBackground = true)
-//@Composable
-//fun HomeScreenPreview() {
-//    NewsAppTheme {
-//        HomeScreen()
-//    }
-//}
+@ExperimentalCoilApi
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    NewsAppTheme {
+        HomeScreen()
+    }
+}
