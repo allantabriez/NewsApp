@@ -1,9 +1,10 @@
 package com.example.newsapp.di
 
+import com.example.newsapp.data.local.SessionManager
 import com.example.newsapp.data.remote.network.AuthInterceptor
 import org.koin.dsl.module
 
 
 val authInterceptModule = module {
-    single { AuthInterceptor() }
+    single { AuthInterceptor(get<SessionManager>()) }
 }

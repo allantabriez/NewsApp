@@ -2,7 +2,6 @@ package com.example.newsapp.di
 
 import com.example.newsapp.BuildConfig
 import com.example.newsapp.data.remote.network.AuthInterceptor
-import com.example.newsapp.utils.Constants.BUILD_TYPE_DEBUG
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -15,7 +14,7 @@ val okhttpModule = module {
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
 
-        if (BuildConfig.BUILD_TYPE == BUILD_TYPE_DEBUG) {
+        if (BuildConfig.DEBUG) {
             okhttp.addInterceptor(
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             )
