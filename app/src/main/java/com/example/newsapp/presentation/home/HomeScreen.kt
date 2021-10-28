@@ -1,12 +1,12 @@
 package com.example.newsapp.presentation.home
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,19 +21,19 @@ import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import com.example.newsapp.R
 import com.example.newsapp.presentation.theme.NewsAppTheme
+import com.example.newsapp.presentation.theme.black
 
 @ExperimentalCoilApi
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    onLogout: () -> Unit
+) {
     Scaffold(
         topBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(
-                        color = Color.Black,
-                        shape = RoundedCornerShape(bottomEnd = 12.dp)
-                    )
+            Surface(
+                color = black,
+                shape = RoundedCornerShape(bottomEnd = 24.dp),
+                modifier = Modifier.fillMaxWidth()
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -48,7 +48,9 @@ fun HomeScreen() {
                             }
                         ),
                         contentDescription = null,
-                        modifier = Modifier.requiredSize(80.dp).padding(start = 16.dp)
+                        modifier = Modifier
+                            .requiredSize(80.dp)
+                            .padding(start = 16.dp)
                     )
                     Column(
                         modifier = Modifier.padding(start = 24.dp, top = 26.dp, end = 16.dp, bottom =  26.dp)
@@ -57,7 +59,6 @@ fun HomeScreen() {
                             text = "John Doe",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.W700,
-                            color = Color.White
                         )
                         Text(
                             text = "Maju terus pantang mundur",
@@ -94,14 +95,5 @@ fun HomeScreen() {
                 NewsCard()
             }
         }
-    }
-}
-
-@ExperimentalCoilApi
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    NewsAppTheme {
-        HomeScreen()
     }
 }

@@ -28,7 +28,9 @@ import org.koin.androidx.compose.getViewModel
 
 @ExperimentalComposeUiApi
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    onLogin: () -> Unit
+) {
     val viewModel: LoginViewModel = getViewModel()
     val keyboardManager = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
@@ -120,8 +122,7 @@ fun LoginScreen() {
 //            )
             }
             Button(
-                onClick = {
-                },
+                onClick = onLogin,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp)
