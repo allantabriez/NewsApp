@@ -10,7 +10,9 @@ class LoginRepositoryImpl(
     private val remoteSource: LoginDataSource
 ) : LoginRepository {
     override suspend fun doLogin(username: String, pass: String): Token {
-        return remoteSource.doLogin(username, pass).toModel()
+        val token = remoteSource.doLogin(username, pass)
+        localSource.saveSession(token.token, token.expiresAt)
+        return token.toModel()
     }
 
     override suspend fun refreshToken(): Token {
