@@ -1,27 +1,20 @@
 package com.example.newsapp.presentation.home
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
-import coil.transform.CircleCropTransformation
-import com.example.newsapp.R
-import com.example.newsapp.presentation.theme.NewsAppTheme
-import com.example.newsapp.presentation.theme.black
+import com.example.newsapp.presentation.home.composables.NewsCard
+import com.example.newsapp.presentation.home.composables.ProfileAppBar
 
 @ExperimentalCoilApi
 @Composable
@@ -30,47 +23,7 @@ fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-            Surface(
-                color = black,
-                shape = RoundedCornerShape(bottomEnd = 24.dp),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Image(
-                        painter = rememberImagePainter(
-                            data = "https://test.com",
-                            builder = {
-                                transformations(CircleCropTransformation())
-                                placeholder(R.drawable.dummy_profile)
-                                error(R.drawable.dummy_profile)
-                            }
-                        ),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .requiredSize(80.dp)
-                            .padding(start = 16.dp)
-                    )
-                    Column(
-                        modifier = Modifier.padding(start = 24.dp, top = 26.dp, end = 16.dp, bottom =  26.dp)
-                    ) {
-                        Text(
-                            text = "John Doe",
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.W700,
-                        )
-                        Text(
-                            text = "Maju terus pantang mundur",
-                            color = Color.White
-                        )
-                        Text(
-                            text = "https://linkedin.com/johndoe",
-                            color = Color.White
-                        )
-                    }
-                }
-            }
+            ProfileAppBar()
         }
     ) {
         LazyColumn(
@@ -82,8 +35,10 @@ fun HomeScreen(
             item {
                 Text(
                     text = "Hot Topics",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.W700,
+                    style = MaterialTheme.typography.body1.copy(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.W700,
+                    )
                 )
             }
             item {
