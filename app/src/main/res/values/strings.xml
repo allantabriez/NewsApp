@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">NewsApp</string>
+    <string name="password">Password</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="email">Email</string>
+    <string name="erase_email">Erase email</string>
+    <string name="login_title">TimeRomanNews.</string>
+    <string name="login">Login</string>
 </resources>

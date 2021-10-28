@@ -1,42 +1,36 @@
 package com.example.newsapp.presentation.login
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.newsapp.R
+import com.example.newsapp.presentation.login.composables.EmailField
+import com.example.newsapp.presentation.login.composables.PassField
+import com.example.newsapp.presentation.theme.NewsAppTheme
 import org.koin.androidx.compose.getViewModel
 
 @ExperimentalComposeUiApi
 @Composable
 fun LoginScreen(
-    onLogin: () -> Unit
+    onLogin: () -> Unit = {}
 ) {
     val viewModel: LoginViewModel = getViewModel()
     val keyboardManager = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
-    val isPassHidden = rememberSaveable {
-        mutableStateOf(true)
-    }
 
     Scaffold {
         Column(
@@ -46,68 +40,32 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "TimeRomanNews.",
-                fontSize = 28.sp,
+                text = stringResource(R.string.login_title),
+                style = MaterialTheme.typography.h5.copy(
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.W400
+                ),
                 modifier = Modifier.padding(top = 62.dp),
             )
             Spacer(modifier = Modifier.height(94.dp))
-            TextField(
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),
+            EmailField(
                 value = viewModel.email.value,
-                onValueChange = { newValue ->
-                    viewModel.setEmail(newValue)
+                setValue = {
+                    viewModel.setEmail(it)
                 },
-                maxLines = 1,
-                label = { Text(text = "Email") },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Email,
-                    imeAction = ImeAction.Next
-                ),
-                keyboardActions = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Down)
-                    }
-                ),
-                trailingIcon = {
-                    if (viewModel.email.value.isNotBlank()) IconButton(onClick = {
-                        viewModel.setEmail("")
-                    }) {
-                        Icon(
-                            imageVector = Icons.Filled.Clear,
-                            contentDescription = "Erase email"
-                        )
-                    }
+                onNext = {
+                    focusManager.moveFocus(FocusDirection.Down)
                 }
             )
             Spacer(modifier = Modifier.height(54.dp))
-            TextField(
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),
+            PassField(
                 value = viewModel.password.value,
-                onValueChange = { newValue ->
-                    viewModel.setPass(newValue)
+                setValue = {
+                    viewModel.setPass(it)
                 },
-                maxLines = 1,
-                label = { Text(text = "Password") },
-                visualTransformation = if (isPassHidden.value) PasswordVisualTransformation() else VisualTransformation.None,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Password,
-                    imeAction = ImeAction.Done
-                ),
-                keyboardActions = KeyboardActions(
-                    onDone = {
-                        focusManager.moveFocus(FocusDirection.Down)
-                        keyboardManager?.hide()
-                    }
-                ),
-                trailingIcon = {
-                    IconButton(onClick = { isPassHidden.value = !isPassHidden.value }) {
-                        Icon(
-                            imageVector = if (isPassHidden.value) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-                            contentDescription = if (isPassHidden.value) "Show password" else "Hide password"
-                        )
-                    }
+                onDone = {
+                    focusManager.moveFocus(FocusDirection.Down)
+                    keyboardManager?.hide()
                 }
             )
             Box(
@@ -127,8 +85,20 @@ fun LoginScreen(
                     .fillMaxWidth()
                     .height(48.dp)
             ) {
-                Text(text = "Login")
+                Text(
+                    text = stringResource(R.string.login),
+                    style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.W700)
+                )
             }
         }
+    }
+}
+
+@ExperimentalComposeUiApi
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    NewsAppTheme {
+        LoginScreen()
     }
 }
