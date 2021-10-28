@@ -1,21 +1,38 @@
 package com.example.newsapp.data
 
+import com.example.newsapp.data.remote.response.toModel
 import com.example.newsapp.domain.model.Token
 import com.example.newsapp.domain.repository.LoginRepository
+import com.example.newsapp.utils.DateUtils
 
 class LoginRepositoryImpl(
     private val localSource: LoginDataSource,
     private val remoteSource: LoginDataSource
 ) : LoginRepository {
     override suspend fun doLogin(username: String, pass: String): Token {
-        TODO("Not yet implemented")
+        return remoteSource.doLogin(username, pass).toModel()
     }
 
     override suspend fun refreshToken(): Token {
-        TODO("Not yet implemented")
+        val expiredDate = localSource.getExpiredAt()
+        return if (DateUtils.between1HourAndNow(expiredDate)) {
+            remoteSource.refreshToken().toModel()
+        } else {
+            Token(
+                expiredDate ?: "",
+                localSource.getToken() ?: ""
+            )
+        }
     }
 
     override fun isLoggedIn(): Boolean {
-        TODO("Not yet implemented")
+        val currentToken = localSource.getToken()
+        val expiredDate = localSource.getExpiredAt()
+
+        if (currentToken.isNullOrBlank()) return false
+        if (expiredDate.isNullOrBlank()) return false
+        if (DateUtils.isDateAfterCurrentTime(expiredDate)) return false
+
+        return true
     }
 }
