@@ -7,7 +7,7 @@ import com.example.newsapp.data.local.room.NewsDao
 import com.example.newsapp.data.local.room.ProfileDao
 import com.example.newsapp.data.remote.response.NewsResponse
 import com.example.newsapp.data.remote.response.ProfileResponse
-import com.example.newsapp.utils.UnusedFunctionException
+import com.example.newsapp.utils.UnusedFunctionThrowable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -43,10 +43,10 @@ class MeLocalDataSource(
 //    Below are unused functions in this implementation
 
     override suspend fun getNews(): List<NewsResponse> {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override suspend fun getProfile(): ProfileResponse {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 }

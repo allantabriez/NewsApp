@@ -7,7 +7,7 @@ import androidx.security.crypto.MasterKeys
 import com.example.newsapp.data.LoginDataSource
 import com.example.newsapp.data.remote.response.TokenResponse
 import com.example.newsapp.utils.Constants.PREFS_NAME
-import com.example.newsapp.utils.UnusedFunctionException
+import com.example.newsapp.utils.UnusedFunctionThrowable
 
 class SessionManager(private val context: Context) : LoginDataSource {
 
@@ -42,10 +42,10 @@ class SessionManager(private val context: Context) : LoginDataSource {
 //    Below are unused functions in this implementation
 
     override suspend fun doLogin(username: String, pass: String): TokenResponse {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override suspend fun refreshToken(): TokenResponse {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 }

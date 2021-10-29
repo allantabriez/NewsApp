@@ -22,6 +22,8 @@ class Application : Application() {
                     dataSourceModule,
                     roomModule,
                     repositoryModule
+                    viewModelModule,
+                    useCaseModule
                 )
             )
         }
