@@ -1,16 +1,24 @@
 package com.example.newsapp.data.remote.network
 
-import com.example.newsapp.data.LoginDataSource
+import com.example.newsapp.domain.usecase.RefreshTokenUseCase
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class AuthInterceptor(private val sessionManager: LoginDataSource) : Interceptor {
-//    Still need to add some kind of session manager to set token in the header
+class AuthInterceptor : Interceptor, KoinComponent {
+    //    Still need to add some kind of session manager to set token in the header
+    private val refreshTokenUseCase: RefreshTokenUseCase by inject()
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        val verifiedToken = runBlocking {
+            refreshTokenUseCase.invoke()
+        }
+
         return chain.proceed(
             chain.request().newBuilder().addHeader(
-                "Authorization", value = "Bearer " + sessionManager.getToken()
+                "Authorization", value = "Bearer " + verifiedToken.token
             ).build()
         )
     }
