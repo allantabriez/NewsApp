@@ -10,15 +10,17 @@ class LoginRepositoryImpl(
     private val remoteSource: LoginDataSource
 ) : LoginRepository {
     override suspend fun doLogin(username: String, pass: String): Token {
-        val token = remoteSource.doLogin(username, pass)
-        localSource.saveSession(token.token, token.expiresAt)
-        return token.toModel()
+        val result = remoteSource.doLogin(username, pass)
+        localSource.saveSession(result.token, result.expiresAt)
+        return result.toModel()
     }
 
     override suspend fun refreshToken(): Token {
         val expiredDate = localSource.getExpiredAt()
         return if (DateUtils.between1HourAndNow(expiredDate)) {
-            remoteSource.refreshToken().toModel()
+            val result = remoteSource.refreshToken()
+            localSource.saveSession(result.token, result.expiresAt)
+            result.toModel()
         } else {
             Token(
                 expiredDate ?: "",
