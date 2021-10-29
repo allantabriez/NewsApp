@@ -16,7 +16,9 @@ import coil.annotation.ExperimentalCoilApi
 import com.example.newsapp.presentation.home.HomeScreen
 import com.example.newsapp.presentation.login.LoginScreen
 import com.example.newsapp.presentation.navigation.NavDestinations.*
+import com.example.newsapp.presentation.start.StartViewModel
 import com.example.newsapp.presentation.theme.NewsAppTheme
+import org.koin.androidx.compose.getViewModel
 
 @ExperimentalCoilApi
 @ExperimentalComposeUiApi
@@ -33,12 +35,13 @@ class MainActivity : ComponentActivity() {
 @ExperimentalComposeUiApi
 @Composable
 fun NewsApp() {
+    val viewModel: StartViewModel = getViewModel()
     NewsAppTheme {
         val navController = rememberNavController()
         Surface(color = MaterialTheme.colors.background) {
             NewsAppNavHost(
                 navController = navController,
-                startDestination = Login.name
+                startDestination = if (viewModel.isLoggedIn()) Home.name else Login.name
             )
         }
     }
