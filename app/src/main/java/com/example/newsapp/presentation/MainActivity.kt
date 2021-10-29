@@ -15,7 +15,8 @@ import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.example.newsapp.presentation.home.HomeScreen
 import com.example.newsapp.presentation.login.LoginScreen
-import com.example.newsapp.presentation.navigation.NavDestinations.*
+import com.example.newsapp.presentation.navigation.NavDestinations.Home
+import com.example.newsapp.presentation.navigation.NavDestinations.Login
 import com.example.newsapp.presentation.start.StartViewModel
 import com.example.newsapp.presentation.theme.NewsAppTheme
 import org.koin.androidx.compose.getViewModel

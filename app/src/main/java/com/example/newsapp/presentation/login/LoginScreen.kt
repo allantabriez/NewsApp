@@ -1,10 +1,7 @@
 package com.example.newsapp.presentation.login
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -21,6 +18,7 @@ import com.example.newsapp.R
 import com.example.newsapp.presentation.login.composables.EmailField
 import com.example.newsapp.presentation.login.composables.PassField
 import com.example.newsapp.presentation.theme.NewsAppTheme
+import com.example.newsapp.utils.Resource
 import org.koin.androidx.compose.getViewModel
 
 @ExperimentalComposeUiApi
@@ -74,13 +72,14 @@ fun LoginScreen(
                     .height(54.dp),
                 contentAlignment = Alignment.Center
             ) {
-//            For loading when fetching data
-//            LinearProgressIndicator(
-//                modifier = Modifier.fillMaxWidth()
-//            )
+                if (viewModel.state.value is Resource.Loading) LinearProgressIndicator(
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
             Button(
-                onClick = onLogin,
+                onClick = {
+                    viewModel.doLogin()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp)
@@ -89,6 +88,10 @@ fun LoginScreen(
                     text = stringResource(R.string.login),
                     style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.W700)
                 )
+            }
+            if (viewModel.state.value is Resource.Success) {
+                viewModel.resetState()
+                onLogin.invoke()
             }
         }
     }

@@ -30,6 +30,10 @@ class LoginViewModel(private val useCase: LoginUseCase): ViewModel() {
         _password.value = value
     }
 
+    fun resetState() {
+        _state.value = Resource.Init()
+    }
+
     fun doLogin() {
         _state.value = Resource.Loading()
         viewModelScope.launch {
