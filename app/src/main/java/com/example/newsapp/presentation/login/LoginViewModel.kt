@@ -33,7 +33,7 @@ class LoginViewModel(private val useCase: LoginUseCase): ViewModel() {
 
     fun doLogin() {
         _state.value = Resource.Loading()
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             runCatching {
                 useCase.invoke(_email.value, _password.value)
             }.onSuccess {
