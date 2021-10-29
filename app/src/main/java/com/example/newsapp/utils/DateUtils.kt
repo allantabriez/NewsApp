@@ -1,5 +1,6 @@
 package com.example.newsapp.utils
 
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,7 +18,9 @@ object DateUtils {
     fun between1HourAndNow(date: String?): Boolean {
         return try {
             val time = SimpleDateFormat(DATE_FORMAT).parse(date!!)
+            Log.d("EXPIRED_TIME", time.toString())
             val currentTime = Calendar.getInstance()
+            Log.d("CURRENT_TIME", currentTime.time.toString())
             time!!.before(currentTime.time) && time.after(currentTime.apply {
                 add(Calendar.HOUR_OF_DAY, -1)
             }.time)

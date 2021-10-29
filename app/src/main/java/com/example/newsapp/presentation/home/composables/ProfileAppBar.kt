@@ -18,11 +18,13 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import com.example.newsapp.R
+import com.example.newsapp.domain.model.Profile
 import com.example.newsapp.presentation.theme.black
+import com.example.newsapp.presentation.theme.grey
 
 @ExperimentalCoilApi
 @Composable
-fun ProfileAppBar() {
+fun ProfileAppBar(profile: Profile) {
     Surface(
         color = black,
         shape = RoundedCornerShape(bottomEnd = 24.dp),
@@ -33,11 +35,10 @@ fun ProfileAppBar() {
         ) {
             Image(
                 painter = rememberImagePainter(
-                    data = "https://test.com",
+                    data = profile.picture,
                     builder = {
                         transformations(CircleCropTransformation())
-                        placeholder(R.drawable.dummy_profile)
-                        error(R.drawable.dummy_profile)
+                        error(grey)
                     }
                 ),
                 contentDescription = stringResource(R.string.profile_image),
@@ -49,22 +50,23 @@ fun ProfileAppBar() {
                 modifier = Modifier.padding(start = 24.dp, top = 26.dp, end = 16.dp, bottom = 26.dp)
             ) {
                 Text(
-                    text = "John Doe",
+                    text = profile.name,
                     style = MaterialTheme.typography.h1.copy(
                         fontSize = 18.sp,
                         fontWeight = FontWeight.W700,
+                        letterSpacing = 0.5.sp
                     ),
                     softWrap = true,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Maju terus pantang mundur",
+                    text = profile.bio,
                     style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.W400),
                     softWrap = true,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "https://linkedin.com/johndoe",
+                    text = profile.web,
                     style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.W400),
                     softWrap = true,
                     overflow = TextOverflow.Ellipsis
