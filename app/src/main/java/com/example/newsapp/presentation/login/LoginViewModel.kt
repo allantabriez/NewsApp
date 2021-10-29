@@ -8,9 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapp.domain.model.Token
 import com.example.newsapp.domain.usecase.LoginUseCase
-import com.example.newsapp.utils.NetworkThrowable
+import com.example.newsapp.utils.DataMapper
 import com.example.newsapp.utils.Resource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val useCase: LoginUseCase): ViewModel() {
@@ -40,18 +39,8 @@ class LoginViewModel(private val useCase: LoginUseCase): ViewModel() {
                 _state.value = Resource.Success(data = it)
                 Log.d("RESULT", it.toString())
             }.onFailure {
-                handleError(it)
+                _state.value = DataMapper.handleError(it)
             }
-        }
-    }
-
-    private fun handleError(e: Throwable) {
-        if (e is NetworkThrowable) {
-            _state.value = Resource.Error(
-                code = e.errorCode
-            )
-        } else {
-            _state.value = Resource.Error()
         }
     }
 }
