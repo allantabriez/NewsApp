@@ -16,4 +16,5 @@
     <string name="login_dialog_title">Oops.. Sorry!</string>
     <string name="login_dialog_text">It seems you need to login again.</string>
     <string name="ok">OK</string>
+    <string name="something_went_wrong">Something went wrong…</string>
 </resources>

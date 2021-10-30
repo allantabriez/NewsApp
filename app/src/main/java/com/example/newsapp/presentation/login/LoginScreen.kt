@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.newsapp.R
 import com.example.newsapp.presentation.login.composables.EmailField
+import com.example.newsapp.presentation.login.composables.ErrorDialog
 import com.example.newsapp.presentation.login.composables.PassField
 import com.example.newsapp.presentation.theme.NewsAppTheme
 import com.example.newsapp.utils.Resource
@@ -48,6 +49,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(94.dp))
             EmailField(
                 value = viewModel.email.value,
+                isError = viewModel.emailError.value,
                 setValue = {
                     viewModel.setEmail(it)
                 },
@@ -58,6 +60,7 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(54.dp))
             PassField(
                 value = viewModel.password.value,
+                isError = viewModel.passError.value,
                 setValue = {
                     viewModel.setPass(it)
                 },
@@ -78,7 +81,7 @@ fun LoginScreen(
             }
             Button(
                 onClick = {
-                    viewModel.doLogin()
+                    if (viewModel.areInputsValid()) viewModel.doLogin()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -89,9 +92,13 @@ fun LoginScreen(
                     style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.W700)
                 )
             }
-            if (viewModel.state.value is Resource.Success) {
-                viewModel.resetState()
-                onLogin.invoke()
+            when (viewModel.state.value) {
+                is Resource.Success -> {
+                    viewModel.resetState()
+                    onLogin.invoke()
+                }
+                is Resource.Error -> ErrorDialog()
+                else -> Unit
             }
         }
     }

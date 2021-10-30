@@ -22,6 +22,12 @@ class LoginViewModel(private val useCase: LoginUseCase): ViewModel() {
     private val _password = mutableStateOf("")
     val password get() = _password
 
+    private val _emailError = mutableStateOf(false)
+    val emailError get() = _emailError
+
+    private val _passError = mutableStateOf(false)
+    val passError get() = _passError
+
     fun setEmail(value: String) {
         _email.value = value
     }
@@ -46,5 +52,19 @@ class LoginViewModel(private val useCase: LoginUseCase): ViewModel() {
                 _state.value = DataMapper.handleError(it)
             }
         }
+    }
+
+    fun areInputsValid(): Boolean {
+        if (_email.value.isBlank()) {
+            _emailError.value = true
+            return false
+        } else _emailError.value = false
+
+        if (_password.value.isBlank()) {
+            _passError.value = true
+            return false
+        } else _passError.value = false
+
+        return true
     }
 }
