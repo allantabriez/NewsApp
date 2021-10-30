@@ -21,6 +21,7 @@ import com.example.newsapp.R
 import com.example.newsapp.domain.model.News
 import com.example.newsapp.presentation.theme.darkerGrey
 import com.example.newsapp.presentation.theme.grey
+import com.example.newsapp.utils.DateUtils
 import kotlinx.coroutines.Dispatchers
 
 @ExperimentalCoilApi
@@ -124,7 +125,7 @@ fun NewsCard(news: News) {
                     )
                 }
                 Text(
-                    text = news.date,
+                    text = DateUtils.toNewsDate(news.date),
                     style = MaterialTheme.typography.caption.copy(
                         color = darkerGrey,
                         fontWeight = FontWeight.W600,
