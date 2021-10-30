@@ -23,50 +23,11 @@ class HomeViewModel(
 
     init {
         getData()
-//        getProfile()
-    }
-
-//    fun getNews() {
-//        viewModelScope.launch {
-//            runCatching {
-//                newsUseCase.invoke()
-//            }.onSuccess {
-//                Log.d("response", it.toString())
-//            }.onFailure {
-//                DataMapper.handleError<List<News>>(it)
-//            }
-//        }
-//    }
-//
-    fun getProfile() {
-        viewModelScope.launch {
-            runCatching {
-                profileUseCase.invoke()
-            }.onSuccess {
-                _state.value = Resource.Success(Pair(first = emptyList(), second = it))
-            }.onFailure {
-                DataMapper.handleError<Profile>(it)
-            }
-        }
     }
 
     private fun getData() {
         _state.value = Resource.Loading()
         viewModelScope.launch {
-//            runCatching {
-//                val news = async {
-//                    newsUseCase.invoke()
-//                }
-//                val profile = async {
-//                    profileUseCase.invoke()
-//                }
-//                Pair(first = news.await(), second = profile.await())
-//            }.onSuccess {
-//                _state.value = Resource.Success(data = it)
-//            }.onFailure {
-//                _state.value = DataMapper.handleError(it)
-//            }
-
             runCatching {
                 val newsResult = runCatching {
                     newsUseCase.invoke()

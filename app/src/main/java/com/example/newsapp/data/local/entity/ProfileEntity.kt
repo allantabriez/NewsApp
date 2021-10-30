@@ -3,6 +3,7 @@ package com.example.newsapp.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.newsapp.domain.model.Profile
 
 @Entity(tableName = "profile_table")
 data class ProfileEntity(
@@ -17,4 +18,12 @@ data class ProfileEntity(
     val web: String,
     @ColumnInfo(name = "picture")
     val picture: String,
+)
+
+
+fun ProfileEntity.toModel() = Profile(
+    name = this.name,
+    bio = this.bio,
+    web = this.web,
+    picture = this.picture
 )
