@@ -16,13 +16,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import coil.size.Scale
 import com.example.newsapp.R
+import com.example.newsapp.domain.model.News
 import com.example.newsapp.presentation.theme.darkerGrey
 import com.example.newsapp.presentation.theme.grey
+import kotlinx.coroutines.Dispatchers
 
 @ExperimentalCoilApi
 @Composable
-fun NewsCard() {
+fun NewsCard(news: News) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -34,19 +37,20 @@ fun NewsCard() {
         ) {
             Image(
                 painter = rememberImagePainter(
-                    data = "https://test.com",
+                    data = news.coverImg,
                     builder = {
-                        placeholder(R.drawable.dummy_news)
-                        error(R.drawable.dummy_news)
+                        dispatcher(Dispatchers.IO)
+                        crossfade(true)
+                        this.scale(Scale.FILL)
                     }
                 ),
                 contentDescription = stringResource(R.string.news_image),
                 modifier = Modifier
+                    .aspectRatio(2.1F, matchHeightConstraintsFirst = false)
                     .fillMaxWidth()
-                    .aspectRatio(2.1F)
             )
             Text(
-                text = "Japan Declares Virus State of Emergency in Tokyo Region",
+                text = news.title,
                 maxLines = 2,
                 softWrap = true,
                 overflow = TextOverflow.Ellipsis,
@@ -69,7 +73,7 @@ fun NewsCard() {
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
-                        text = "5",
+                        text = news.views.toString(),
                         style = MaterialTheme.typography.caption.copy(
                             color = darkerGrey,
                             fontWeight = FontWeight.W600,
@@ -83,7 +87,7 @@ fun NewsCard() {
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
-                        text = "5",
+                        text = news.comments.toString(),
                         style = MaterialTheme.typography.caption.copy(
                             color = darkerGrey,
                             fontWeight = FontWeight.W600,
@@ -97,7 +101,7 @@ fun NewsCard() {
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
-                        text = "5",
+                        text = news.upVotes.toString(),
                         style = MaterialTheme.typography.caption.copy(
                             color = darkerGrey,
                             fontWeight = FontWeight.W600,
@@ -111,7 +115,7 @@ fun NewsCard() {
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
-                        text = "5",
+                        text = news.downVotes.toString(),
                         style = MaterialTheme.typography.caption.copy(
                             color = darkerGrey,
                             fontWeight = FontWeight.W600,
@@ -120,7 +124,7 @@ fun NewsCard() {
                     )
                 }
                 Text(
-                    text = "7 Jan 21",
+                    text = news.date,
                     style = MaterialTheme.typography.caption.copy(
                         color = darkerGrey,
                         fontWeight = FontWeight.W600,

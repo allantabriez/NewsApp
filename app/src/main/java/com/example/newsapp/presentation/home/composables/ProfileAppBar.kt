@@ -20,7 +20,6 @@ import coil.transform.CircleCropTransformation
 import com.example.newsapp.R
 import com.example.newsapp.domain.model.Profile
 import com.example.newsapp.presentation.theme.black
-import com.example.newsapp.presentation.theme.grey
 
 @ExperimentalCoilApi
 @Composable
@@ -38,7 +37,6 @@ fun ProfileAppBar(profile: Profile) {
                     data = profile.picture,
                     builder = {
                         transformations(CircleCropTransformation())
-                        error(grey)
                     }
                 ),
                 contentDescription = stringResource(R.string.profile_image),

@@ -51,6 +51,7 @@ class HomeViewModel(
     }
 
     private fun getData() {
+        _state.value = Resource.Loading()
         viewModelScope.launch {
 //            runCatching {
 //                val news = async {
