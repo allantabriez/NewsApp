@@ -1,6 +1,5 @@
 package com.example.newsapp.presentation.home.composables
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -9,19 +8,19 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
-import coil.transform.CircleCropTransformation
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.newsapp.R
 import com.example.newsapp.domain.model.Profile
 import com.example.newsapp.presentation.theme.black
+import com.skydoves.landscapist.glide.GlideImage
 
-@ExperimentalCoilApi
 @Composable
 fun ProfileAppBar(profile: Profile) {
     Surface(
@@ -32,17 +31,16 @@ fun ProfileAppBar(profile: Profile) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Image(
-                painter = rememberImagePainter(
-                    data = profile.picture,
-                    builder = {
-                        transformations(CircleCropTransformation())
-                    }
-                ),
+            GlideImage(
+                imageModel = profile.picture,
+                requestOptions = RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .circleCrop(),
+                contentScale = ContentScale.FillBounds,
                 contentDescription = stringResource(R.string.profile_image),
                 modifier = Modifier
                     .requiredSize(80.dp)
-                    .padding(start = 16.dp)
+                    .padding(start = 16.dp),
             )
             Column(
                 modifier = Modifier.padding(start = 24.dp, top = 26.dp, end = 16.dp, bottom = 26.dp)

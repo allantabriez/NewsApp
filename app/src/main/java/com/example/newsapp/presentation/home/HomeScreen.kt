@@ -14,7 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.annotation.ExperimentalCoilApi
 import com.example.newsapp.R
 import com.example.newsapp.domain.model.News
 import com.example.newsapp.domain.model.Profile
@@ -25,7 +24,6 @@ import com.example.newsapp.utils.ErrorCode
 import com.example.newsapp.utils.Resource
 import org.koin.androidx.compose.getViewModel
 
-@ExperimentalCoilApi
 @Composable
 fun HomeScreen(
     onLogout: () -> Unit

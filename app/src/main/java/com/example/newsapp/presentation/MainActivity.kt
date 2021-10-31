@@ -12,7 +12,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import coil.annotation.ExperimentalCoilApi
 import com.example.newsapp.presentation.home.HomeScreen
 import com.example.newsapp.presentation.login.LoginScreen
 import com.example.newsapp.presentation.navigation.NavDestinations.Home
@@ -21,7 +20,6 @@ import com.example.newsapp.presentation.start.StartViewModel
 import com.example.newsapp.presentation.theme.NewsAppTheme
 import org.koin.androidx.compose.getViewModel
 
-@ExperimentalCoilApi
 @ExperimentalComposeUiApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +30,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@ExperimentalCoilApi
 @ExperimentalComposeUiApi
 @Composable
 fun NewsApp() {
@@ -48,7 +45,6 @@ fun NewsApp() {
     }
 }
 
-@ExperimentalCoilApi
 @ExperimentalComposeUiApi
 @Composable
 fun NewsAppNavHost(navController: NavHostController, startDestination: String) {
@@ -72,7 +68,6 @@ fun NewsAppNavHost(navController: NavHostController, startDestination: String) {
     }
 }
 
-@ExperimentalCoilApi
 @ExperimentalComposeUiApi
 @Preview(showBackground = true)
 @Composable

@@ -1,6 +1,5 @@
 package com.example.newsapp.presentation.home.composables
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
@@ -9,24 +8,24 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
-import coil.compose.rememberImagePainter
-import coil.size.Scale
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.newsapp.R
 import com.example.newsapp.domain.model.News
 import com.example.newsapp.presentation.theme.darkerGrey
 import com.example.newsapp.presentation.theme.grey
 import com.example.newsapp.utils.DateUtils
-import kotlinx.coroutines.Dispatchers
+import com.skydoves.landscapist.glide.GlideImage
 
-@ExperimentalCoilApi
 @Composable
 fun NewsCard(news: News) {
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,19 +35,16 @@ fun NewsCard(news: News) {
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            Image(
-                painter = rememberImagePainter(
-                    data = news.coverImg,
-                    builder = {
-                        dispatcher(Dispatchers.IO)
-                        crossfade(true)
-                        this.scale(Scale.FILL)
-                    }
-                ),
-                contentDescription = stringResource(R.string.news_image),
+            GlideImage(
+                imageModel = news.coverImg,
+                requestOptions = RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL),
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .aspectRatio(2.1F, matchHeightConstraintsFirst = false)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                alignment = Alignment.Center,
+                contentDescription = stringResource(id = R.string.news_image)
             )
             Text(
                 text = news.title,
