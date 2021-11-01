@@ -10,4 +10,11 @@
     <string name="ok">OK</string>
     <string name="login_title">TimeRomanNews.</string>
     <string name="login">Login</string>
+    <string name="login_dialog_text">Please login again.</string>
+    <string name="profile_image">Profile Image</string>
+    <string name="news_image">News Image</string>
+    <string name="views">Views</string>
+    <string name="comments">Comments</string>
+    <string name="likes">Likes</string>
+    <string name="dislikes">Dislikes</string>
 </resources>
