@@ -5,8 +5,8 @@ import com.example.newsapp.data.remote.body.LoginBody
 import com.example.newsapp.data.remote.network.LoginService
 import com.example.newsapp.data.remote.response.TokenResponse
 import com.example.newsapp.utils.ErrorCode
-import com.example.newsapp.utils.NetworkException
-import com.example.newsapp.utils.UnusedFunctionException
+import com.example.newsapp.utils.NetworkThrowable
+import com.example.newsapp.utils.UnusedFunctionThrowable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -20,10 +20,10 @@ class LoginRemoteDataSource(
                 val response = loginService.doLogin(LoginBody(username, pass))
                 if (response.isSuccessful) return@withContext response.body() as TokenResponse
                 else {
-                    throw NetworkException(response.message(), ErrorCode.fromInt(response.code()))
+                    throw NetworkThrowable(response.message(), ErrorCode.fromInt(response.code()))
                 }
             } catch (e: Exception) {
-                throw NetworkException(e.message, ErrorCode.CodeUnknown)
+                throw NetworkThrowable(e.message, ErrorCode.CodeUnknown)
             }
         }
 
@@ -31,25 +31,25 @@ class LoginRemoteDataSource(
         try {
             val response = loginService.refreshToken()
             if (response.isSuccessful) return@withContext response.body() as TokenResponse
-            else throw NetworkException(response.message(), ErrorCode.fromInt(response.code()))
+            else throw NetworkThrowable(response.message(), ErrorCode.fromInt(response.code()))
         } catch (e: Exception) {
-            throw NetworkException(e.message, ErrorCode.CodeUnknown)
+            throw NetworkThrowable(e.message, ErrorCode.CodeUnknown)
         }
     }
 
     override fun saveSession(token: String, expiredAt: String) {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override fun getToken(): String {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override fun getExpiredAt(): String {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override fun deleteSession() {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 }

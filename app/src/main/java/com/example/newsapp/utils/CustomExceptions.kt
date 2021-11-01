@@ -1,8 +1,8 @@
 package com.example.newsapp.utils
 
-class UnusedFunctionException() : Exception("Function not used in this implementation") {
+class UnusedFunctionThrowable() : Throwable("Function not used in this implementation") {
 }
 
-class NetworkException(message: String?, code: ErrorCode): Exception(message) {
+class NetworkThrowable(message: String?, code: ErrorCode): Throwable(message) {
     val errorCode = code
 }

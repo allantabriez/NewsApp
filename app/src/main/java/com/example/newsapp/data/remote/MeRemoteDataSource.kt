@@ -7,8 +7,8 @@ import com.example.newsapp.data.remote.network.MeService
 import com.example.newsapp.data.remote.response.NewsResponse
 import com.example.newsapp.data.remote.response.ProfileResponse
 import com.example.newsapp.utils.ErrorCode
-import com.example.newsapp.utils.NetworkException
-import com.example.newsapp.utils.UnusedFunctionException
+import com.example.newsapp.utils.NetworkThrowable
+import com.example.newsapp.utils.UnusedFunctionThrowable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
@@ -21,9 +21,9 @@ class MeRemoteDataSource(
         try {
             val response = meService.getNews()
             if (response.isSuccessful) return@withContext response.body()?.data as List<NewsResponse>
-            else throw NetworkException(response.message(), ErrorCode.fromInt(response.code()))
+            else throw NetworkThrowable(response.message(), ErrorCode.fromInt(response.code()))
         } catch (e: Exception) {
-            throw NetworkException(e.message, ErrorCode.CodeUnknown)
+            throw NetworkThrowable(e.message, ErrorCode.CodeUnknown)
         }
     }
 
@@ -31,9 +31,9 @@ class MeRemoteDataSource(
         try {
             val response = meService.getProfile()
             if (response.isSuccessful) return@withContext response.body() as ProfileResponse
-            else throw NetworkException(response.message(), ErrorCode.fromInt(response.code()))
+            else throw NetworkThrowable(response.message(), ErrorCode.fromInt(response.code()))
         } catch (e: Exception) {
-            throw NetworkException(e.message, ErrorCode.CodeUnknown)
+            throw NetworkThrowable(e.message, ErrorCode.CodeUnknown)
         }
     }
 
@@ -41,26 +41,26 @@ class MeRemoteDataSource(
 //    Below are unused functions in this implementation
 
     override suspend fun getCachedNews(): List<NewsEntity> {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override suspend fun getCachedProfile(): List<ProfileEntity> {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override suspend fun insertNews(news: List<NewsEntity>) {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override suspend fun insertProfile(profile: ProfileEntity) {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override suspend fun deleteCachedNews() {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
     override suspend fun deleteCachedProfile() {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 }

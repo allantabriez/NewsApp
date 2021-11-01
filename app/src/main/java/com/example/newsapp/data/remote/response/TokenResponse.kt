@@ -1,7 +1,7 @@
 package com.example.newsapp.data.remote.response
 
 import com.example.newsapp.domain.model.Token
-import com.example.newsapp.utils.UnusedFunctionException
+import com.example.newsapp.utils.UnusedFunctionThrowable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -24,7 +24,7 @@ data class TokenResponse(
     }
 
     override fun toEntity() {
-        throw UnusedFunctionException()
+        throw UnusedFunctionThrowable()
     }
 
 }

@@ -1,6 +1,5 @@
 package com.example.newsapp.data
 
-import com.example.newsapp.data.remote.response.toModel
 import com.example.newsapp.domain.model.News
 import com.example.newsapp.domain.model.Profile
 import com.example.newsapp.domain.repository.MeRepository
