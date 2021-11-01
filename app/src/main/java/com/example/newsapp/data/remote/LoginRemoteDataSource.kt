@@ -1,15 +1,14 @@
 package com.example.newsapp.data.remote
 
 import com.example.newsapp.data.LoginDataSource
+import com.example.newsapp.data.remote.body.LoginBody
 import com.example.newsapp.data.remote.network.LoginService
 import com.example.newsapp.data.remote.response.TokenResponse
 import com.example.newsapp.utils.ErrorCode
 import com.example.newsapp.utils.NetworkException
 import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlin.Exception
 
 class LoginRemoteDataSource(
     private val loginService: LoginService,
@@ -18,7 +17,7 @@ class LoginRemoteDataSource(
     override suspend fun doLogin(username: String, pass: String): TokenResponse =
         withContext(ioDispatcher) {
             try {
-                val response = loginService.doLogin(username, pass)
+                val response = loginService.doLogin(LoginBody(username, pass))
                 if (response.isSuccessful) return@withContext response.body() as TokenResponse
                 else {
                     throw NetworkException(response.message(), ErrorCode.fromInt(response.code()))
@@ -28,7 +27,7 @@ class LoginRemoteDataSource(
             }
         }
 
-    override suspend fun refreshToken(): TokenResponse = withContext(Dispatchers.IO) {
+    override suspend fun refreshToken(): TokenResponse = withContext(ioDispatcher) {
         try {
             val response = loginService.refreshToken()
             if (response.isSuccessful) return@withContext response.body() as TokenResponse

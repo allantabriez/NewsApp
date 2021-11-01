@@ -1,6 +1,7 @@
 package com.example.newsapp.data.remote.response
 
 import com.example.newsapp.domain.model.Token
+import com.example.newsapp.utils.UnusedFunctionException
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,8 +16,15 @@ data class TokenResponse(
 
     @SerialName("token")
     val token: String
-)
+) : ResponseMapper<Token, Unit> {
+    override fun toModel(): Token {
+        return Token(
+            this.expiresAt, this.token
+        )
+    }
 
-fun TokenResponse.toModel() = Token(
-    this.expiresAt, this.token
-)
+    override fun toEntity() {
+        throw UnusedFunctionException()
+    }
+
+}

@@ -8,7 +8,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class AuthInterceptor : Interceptor, KoinComponent {
-    //    Still need to add some kind of session manager to set token in the header
     private val refreshTokenUseCase: RefreshTokenUseCase by inject()
 
     override fun intercept(chain: Interceptor.Chain): Response {
