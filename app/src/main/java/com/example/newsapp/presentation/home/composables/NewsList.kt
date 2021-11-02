@@ -8,9 +8,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.newsapp.R
 import com.example.newsapp.domain.model.News
 
 @Composable
@@ -23,7 +25,7 @@ fun NewsList(newsList: List<News>) {
     ) {
         item {
             Text(
-                text = "Hot Topics",
+                text = stringResource(R.string.home_title),
                 style = MaterialTheme.typography.body1.copy(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.W700,
@@ -32,7 +34,7 @@ fun NewsList(newsList: List<News>) {
         }
         item {
             Text(
-                text = "See What's Happening in the World"
+                text = stringResource(R.string.home_description)
             )
         }
         items(items = newsList) {

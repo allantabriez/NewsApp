@@ -30,13 +30,9 @@ class HomeViewModel(
         _state.value = Resource.Loading()
         viewModelScope.launch {
             runCatching {
-                val newsResult = runCatching {
-                    newsUseCase.invoke()
-                }
-                val profileResult = runCatching {
-                    profileUseCase.invoke()
-                }
-                Pair(first = newsResult.getOrThrow(), second = profileResult.getOrThrow())
+                val newsResult = newsUseCase.invoke()
+                val profileResult = profileUseCase.invoke()
+                newsResult to profileResult
             }.onSuccess {
                 _state.value = Resource.Success(data = it)
             }.onFailure {

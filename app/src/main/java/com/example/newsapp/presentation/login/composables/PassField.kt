@@ -73,7 +73,7 @@ fun PassField(
         )
 
         if (isError) Text(
-            text = "Password is not valid",
+            text = stringResource(R.string.password_is_not_valid),
             color = MaterialTheme.colors.error,
             style = MaterialTheme.typography.caption,
             modifier = Modifier.padding(start = 16.dp, top = 4.dp)

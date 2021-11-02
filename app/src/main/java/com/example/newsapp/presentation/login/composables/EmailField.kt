@@ -63,7 +63,7 @@ fun EmailField(
         )
 
         if (isError) Text(
-            text = "Email is not valid",
+            text = stringResource(R.string.email_is_not_valid),
             color = MaterialTheme.colors.error,
             style = MaterialTheme.typography.caption,
             modifier = Modifier.padding(start = 16.dp, top = 4.dp)

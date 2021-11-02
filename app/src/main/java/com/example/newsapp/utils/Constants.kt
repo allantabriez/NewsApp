@@ -9,4 +9,6 @@ object Constants {
     const val DB_NAME = "News.db"
     const val DB_VERSION = 1
     const val PREFS_NAME = "NEWS_APP"
+    const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    const val NEWS_DATE_FORMAT = "d MMM yyyy"
 }
