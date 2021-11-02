@@ -34,13 +34,14 @@ fun ProfileAppBar(profile: Profile) {
             GlideImage(
                 imageModel = profile.picture,
                 requestOptions = RequestOptions()
+                    .override(80)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .circleCrop(),
                 contentScale = ContentScale.FillBounds,
                 contentDescription = stringResource(R.string.profile_image),
-                modifier = Modifier
-                    .requiredSize(80.dp)
-                    .padding(start = 16.dp),
+                modifier = Modifier.padding(start = 16.dp)
+                    .size(80.dp)
+                    .aspectRatio(1f)
             )
             Column(
                 modifier = Modifier.padding(start = 24.dp, top = 26.dp, end = 16.dp, bottom = 26.dp)
