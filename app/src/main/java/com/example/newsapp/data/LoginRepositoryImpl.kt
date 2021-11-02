@@ -27,7 +27,7 @@ class LoginRepositoryImpl(
                     localSource.getToken() ?: ""
                 )
             }
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             Token(
                 expiredDate ?: "",
                 localSource.getToken() ?: ""
