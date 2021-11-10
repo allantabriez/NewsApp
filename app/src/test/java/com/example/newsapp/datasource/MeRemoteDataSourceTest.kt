@@ -1,6 +1,6 @@
 package com.example.newsapp.datasource
 
-import com.example.newsapp.DummyData
+import com.example.newsapp.data.DummyData
 import com.example.newsapp.data.remote.MeRemoteDataSource
 import com.example.newsapp.data.remote.response.DataResponse
 import com.example.newsapp.data.remote.response.NewsResponse
