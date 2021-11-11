@@ -19,7 +19,8 @@ class HomeViewModel(
     private val profileUseCase: GetProfileUseCase,
 ) : ViewModel() {
 
-    private val _state: MutableState<Resource<Pair<List<News>, Profile>>> = mutableStateOf(Resource.Init())
+    private val _state: MutableState<Resource<Pair<List<News>, Profile>>> =
+        mutableStateOf(Resource.Init())
     val state: State<Resource<Pair<List<News>, Profile>>> get() = _state
 
     init {
@@ -31,13 +32,9 @@ class HomeViewModel(
         _state.value = Resource.Loading()
         viewModelScope.launch {
             runCatching {
-                val newsResult = runCatching {
-                    newsUseCase.invoke()
-                }
-                val profileResult = runCatching {
-                    profileUseCase.invoke()
-                }
-                Pair(first = newsResult.getOrThrow(), second = profileResult.getOrThrow())
+                val newsResult = newsUseCase.invoke()
+                val profileResult = profileUseCase.invoke()
+                newsResult to profileResult
             }.onSuccess {
                 _state.value = Resource.Success(data = it)
                 EspressoIdlingResource.decrement()

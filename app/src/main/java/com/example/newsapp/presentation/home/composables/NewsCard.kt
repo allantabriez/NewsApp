@@ -20,7 +20,7 @@ import com.example.newsapp.R
 import com.example.newsapp.domain.model.News
 import com.example.newsapp.presentation.theme.darkerGrey
 import com.example.newsapp.presentation.theme.grey
-import com.example.newsapp.utils.DateUtils
+import com.example.newsapp.utils.toNewsDate
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
@@ -121,7 +121,7 @@ fun NewsCard(news: News) {
                     )
                 }
                 Text(
-                    text = DateUtils.toNewsDate(news.date),
+                    text = news.date.toNewsDate(),
                     style = MaterialTheme.typography.caption.copy(
                         color = darkerGrey,
                         fontWeight = FontWeight.W600,

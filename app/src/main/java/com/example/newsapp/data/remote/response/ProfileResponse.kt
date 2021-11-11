@@ -22,7 +22,7 @@ data class ProfileResponse(
 
     @SerialName("username")
     val userName: String
-): ResponseMapper<Profile, ProfileEntity> {
+) : ResponseMapper<Profile, ProfileEntity> {
     override fun toEntity(): ProfileEntity {
         return ProfileEntity(
             name = this.name,

@@ -13,17 +13,6 @@ class SessionManager(private val preferences: SharedPreferences) : LoginDataSour
         const val EXPIRED_AT = "expired_at"
     }
 
-//    private val keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC
-//    private val mainKeyAlias = MasterKeys.getOrCreate(keyGenParameterSpec)
-//
-//    private val preferences = EncryptedSharedPreferences.create(
-//        PREFS_NAME,
-//        mainKeyAlias,
-//        context,
-//        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-//        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-//    )
-
     override fun saveSession(token: String, expiredAt: String) = preferences.edit {
         putString(TOKEN, token)
         putString(EXPIRED_AT, expiredAt)

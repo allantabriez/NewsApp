@@ -1,6 +1,5 @@
 package com.example.newsapp.data
 
-import com.example.newsapp.data.remote.response.toModel
 import com.example.newsapp.domain.model.Token
 import com.example.newsapp.domain.repository.LoginRepository
 import com.example.newsapp.utils.DateUtils
@@ -29,7 +28,7 @@ class LoginRepositoryImpl(
                     localSource.getToken() ?: ""
                 )
             }
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             Token(
                 expiredDate ?: "",
                 localSource.getToken() ?: ""

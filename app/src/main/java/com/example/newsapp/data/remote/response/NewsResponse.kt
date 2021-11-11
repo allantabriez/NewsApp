@@ -32,7 +32,7 @@ data class NewsResponse(
 
     @SerialName("url")
     val url: String
-): ResponseMapper<News, NewsEntity> {
+) : ResponseMapper<News, NewsEntity> {
     override fun toEntity(): NewsEntity {
         return NewsEntity(
             id = this.id,
@@ -91,4 +91,3 @@ data class Channel(
     @SerialName("id")
     val id: Int
 )
-

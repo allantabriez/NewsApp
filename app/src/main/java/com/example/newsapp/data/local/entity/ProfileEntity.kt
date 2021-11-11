@@ -20,7 +20,6 @@ data class ProfileEntity(
     val picture: String,
 )
 
-
 fun ProfileEntity.toModel() = Profile(
     name = this.name,
     bio = this.bio,

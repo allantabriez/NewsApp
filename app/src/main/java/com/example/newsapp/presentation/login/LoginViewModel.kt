@@ -57,16 +57,30 @@ class LoginViewModel(private val useCase: LoginUseCase): ViewModel() {
     }
 
     fun areInputsValid(): Boolean {
-        if (_email.value.isBlank()) {
-            _emailError.value = true
-            return false
-        } else _emailError.value = false
-
-        if (_password.value.isBlank()) {
-            _passError.value = true
-            return false
-        } else _passError.value = false
+        if (!isEmailValid()) return false
+        if (!isPassValid()) return false
 
         return true
     }
+
+    private fun isEmailValid(): Boolean {
+        return if (_email.value.isBlank()) {
+            _emailError.value = true
+            false
+        } else {
+            _emailError.value = false
+            true
+        }
+    }
+
+    private fun isPassValid(): Boolean {
+        return if (_password.value.isBlank()) {
+            _passError.value = true
+            false
+        } else {
+            _passError.value = false
+            true
+        }
+    }
+
 }

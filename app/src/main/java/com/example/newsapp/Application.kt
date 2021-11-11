@@ -24,7 +24,7 @@ class Application : Application() {
                     roomModule,
                     repositoryModule,
                     useCaseModule,
-                    viewModelModule,
+                    viewModelModule
                 )
             )
         }

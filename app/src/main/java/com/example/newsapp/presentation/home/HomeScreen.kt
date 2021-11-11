@@ -72,7 +72,7 @@ fun HandleLoading() {
 }
 
 @Composable
-fun DisplayError(){
+fun DisplayError() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -81,7 +81,7 @@ fun DisplayError(){
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = "Oops.. Sorry!",
+            text = stringResource(id = R.string.login_dialog_title),
             style = MaterialTheme.typography.h1.copy(
                 fontSize = 18.sp,
                 letterSpacing = 0.5.sp,
