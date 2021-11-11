@@ -16,9 +16,9 @@ object DateUtils {
 
     fun between1HourAndNow(date: String?): Boolean {
         return try {
-            val time = SimpleDateFormat(DATE_FORMAT).parse(date!!)
+            val time = SimpleDateFormat(DATE_FORMAT).parse(date)
             val currentTime = Calendar.getInstance()
-            time!!.before(currentTime.time) && time.after(currentTime.apply {
+            time.before(currentTime.time) && time.after(currentTime.apply {
                 add(Calendar.HOUR_OF_DAY, -1)
             }.time)
         } catch (e: Exception) {
