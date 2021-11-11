@@ -1,6 +1,5 @@
 package com.example.newsapp.presentation.login
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -47,7 +46,6 @@ class LoginViewModel(private val useCase: LoginUseCase): ViewModel() {
                 useCase.invoke(_email.value, _password.value)
             }.onSuccess {
                 _state.value = Resource.Success(data = it)
-                Log.d("RESULT", it.toString())
             }.onFailure {
                 _state.value = DataMapper.handleError(it)
             }
