@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.newsapp.domain.model.Token
 import com.example.newsapp.domain.usecase.LoginUseCase
 import com.example.newsapp.utils.DataMapper
+import com.example.newsapp.utils.EspressoIdlingResource
 import com.example.newsapp.utils.Resource
 import kotlinx.coroutines.launch
 
@@ -40,14 +41,17 @@ class LoginViewModel(private val useCase: LoginUseCase): ViewModel() {
     }
 
     fun doLogin() {
+        EspressoIdlingResource.increment()
         _state.value = Resource.Loading()
         viewModelScope.launch {
             runCatching {
                 useCase.invoke(_email.value, _password.value)
             }.onSuccess {
                 _state.value = Resource.Success(data = it)
+                EspressoIdlingResource.decrement()
             }.onFailure {
                 _state.value = DataMapper.handleError(it)
+                EspressoIdlingResource.decrement()
             }
         }
     }

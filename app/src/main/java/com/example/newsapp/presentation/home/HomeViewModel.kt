@@ -10,6 +10,7 @@ import com.example.newsapp.domain.model.Profile
 import com.example.newsapp.domain.usecase.GetNewsUseCase
 import com.example.newsapp.domain.usecase.GetProfileUseCase
 import com.example.newsapp.utils.DataMapper
+import com.example.newsapp.utils.EspressoIdlingResource
 import com.example.newsapp.utils.Resource
 import kotlinx.coroutines.launch
 
@@ -26,6 +27,7 @@ class HomeViewModel(
     }
 
     private fun getData() {
+        EspressoIdlingResource.increment()
         _state.value = Resource.Loading()
         viewModelScope.launch {
             runCatching {
@@ -38,8 +40,10 @@ class HomeViewModel(
                 Pair(first = newsResult.getOrThrow(), second = profileResult.getOrThrow())
             }.onSuccess {
                 _state.value = Resource.Success(data = it)
+                EspressoIdlingResource.decrement()
             }.onFailure {
                 _state.value = DataMapper.handleError(it)
+                EspressoIdlingResource.decrement()
             }
         }
     }
