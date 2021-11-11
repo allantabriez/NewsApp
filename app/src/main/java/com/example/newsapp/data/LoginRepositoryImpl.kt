@@ -7,7 +7,8 @@ import com.example.newsapp.utils.DateUtils
 
 class LoginRepositoryImpl(
     private val localSource: LoginDataSource,
-    private val remoteSource: LoginDataSource
+    private val remoteSource: LoginDataSource,
+    private val dateUtils: DateUtils
 ) : LoginRepository {
     override suspend fun doLogin(username: String, pass: String): Token {
         val result = remoteSource.doLogin(username, pass)
@@ -18,7 +19,7 @@ class LoginRepositoryImpl(
     override suspend fun refreshToken(): Token {
         val expiredDate = localSource.getExpiredAt()
         return try {
-            if (DateUtils.between1HourAndNow(expiredDate)) {
+            if (dateUtils.between1HourAndNow(expiredDate)) {
                 val result = remoteSource.refreshToken()
                 localSource.saveSession(result.token, result.expiresAt)
                 result.toModel()
@@ -42,7 +43,7 @@ class LoginRepositoryImpl(
 
         if (currentToken.isNullOrBlank()) return false
         if (expiredDate.isNullOrBlank()) return false
-        if (DateUtils.isDateAfterCurrentTime(expiredDate)) return false
+        if (dateUtils.isDateAfterCurrentTime(expiredDate)) return false
 
         return true
     }
