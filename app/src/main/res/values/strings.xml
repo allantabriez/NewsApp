@@ -21,22 +21,5 @@
     <string name="home_title">Hot Topics</string>
     <string name="home_description">See What\'s Happening in the World</string>
     <string name="email_is_not_valid">Email is not valid</string>
-    <string name="password">Password</string>
-    <string name="show_password">Show password</string>
-    <string name="hide_password">Hide password</string>
-    <string name="email">Email</string>
-    <string name="erase_email">Erase email</string>
-    <string name="login_title">TimeRomanNews.</string>
-    <string name="login">Login</string>
-    <string name="profile_image">Profile Image</string>
-    <string name="news_image">News Image</string>
-    <string name="views">Views</string>
-    <string name="comments">Comments</string>
-    <string name="likes">Likes</string>
-    <string name="dislikes">Dislikes</string>
-    <string name="login_dialog_title">Oops.. Sorry!</string>
-    <string name="login_dialog_text">It seems you need to login again.</string>
-    <string name="ok">OK</string>
-    <string name="something_went_wrong">Something went wrong…</string>
     <string name="content_desc_email_input">Email Input</string>
 </resources>
