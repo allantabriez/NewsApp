@@ -21,6 +21,8 @@ class Application : Application() {
                     retrofitModule,
                     dataSourceModule,
                     roomModule,
+                    useCaseModule,
+                    viewModelModule
                 )
             )
         }
