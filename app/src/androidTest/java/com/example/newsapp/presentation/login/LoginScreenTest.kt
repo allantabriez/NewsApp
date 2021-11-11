@@ -42,10 +42,10 @@ class LoginScreenTest {
 
     @Test
     fun checkUIOnly() {
-        composeTestRule.onNodeWithText("TimeRomanNews.").assertExists()
-        composeTestRule.onNodeWithContentDescription("Email Input").assertExists()
-        composeTestRule.onNodeWithContentDescription("Password Input").assertExists()
-        composeTestRule.onNodeWithText("Login").assertExists()
+        composeTestRule.onNodeWithText("TimeRomanNews.").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("Email Input").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("Password Input").assertIsDisplayed()
+        composeTestRule.onNodeWithText("Login").assertIsDisplayed()
     }
 
     @Test
@@ -61,30 +61,6 @@ class LoginScreenTest {
         composeTestRule.onNodeWithContentDescription("Email Input").performTextInput("tester")
         composeTestRule.onNodeWithContentDescription("Password Input").performTextInput("tester123")
         composeTestRule.onNodeWithText("Login").performClick()
-        composeTestRule.onNodeWithContentDescription("Home Screen").assertIsDisplayed()
+        composeTestRule.onNodeWithContentDescription("Home Screen").assertExists()
     }
 }
-
-/*
-class MyComposeTest {
-
-    @get:Rule
-    val composeTestRule = createComposeRule()
-    // use createAndroidComposeRule<YourActivity>() if you need access to
-    // an activity
-
-    @Test
-    fun MyTest() {
-        // Start the app
-        composeTestRule.setContent {
-            MyAppTheme {
-                MainScreen(uiState = fakeUiState, /*...*/)
-            }
-        }
-
-        composeTestRule.onNodeWithText("Continue").performClick()
-
-        composeTestRule.onNodeWithText("Welcome").assertIsDisplayed()
-    }
-}
-* */
