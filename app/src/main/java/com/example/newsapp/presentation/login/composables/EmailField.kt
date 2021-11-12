@@ -28,11 +28,12 @@ fun EmailField(
     onNext: () -> Unit = {}
 ) {
     Column {
+        val emailInputDesc = stringResource(id = R.string.content_desc_email_input)
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .semantics {
-                    contentDescription = "Email Input"
+                    contentDescription = emailInputDesc
                 },
             isError = isError,
             colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),

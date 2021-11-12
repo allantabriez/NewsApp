@@ -16,6 +16,7 @@ import com.example.newsapp.R
 fun ErrorDialog() {
 
     val isDialogOpen = remember { mutableStateOf(true) }
+    val dialogDesc = stringResource(R.string.content_error_dialog)
 
     if (isDialogOpen.value) AlertDialog(
         onDismissRequest = {
@@ -36,6 +37,6 @@ fun ErrorDialog() {
                 Text(text = stringResource(R.string.ok))
             }
         },
-        modifier = Modifier.semantics { contentDescription = "Error Dialog" }
+        modifier = Modifier.semantics { contentDescription = dialogDesc }
     )
 }

@@ -32,9 +32,10 @@ fun HomeScreen(
 ) {
     val viewModel: HomeViewModel = getViewModel()
     val isDialogOpen = remember { mutableStateOf(false) }
+    val homeScreenDesc = stringResource(R.string.content_home_screen)
 
     Scaffold(
-        modifier = Modifier.semantics { contentDescription = "Home Screen" },
+        modifier = Modifier.semantics { contentDescription = homeScreenDesc },
         topBar = {
             if (viewModel.state.value is Resource.Success) {
                 ProfileAppBar(viewModel.state.value.data?.second as Profile)

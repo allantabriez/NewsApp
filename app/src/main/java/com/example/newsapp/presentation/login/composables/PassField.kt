@@ -37,11 +37,12 @@ fun PassField(
     }
 
     Column {
+        val passInputDesc = stringResource(R.string.content_pass_input)
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
                 .semantics {
-                    contentDescription = "Password Input"
+                    contentDescription = passInputDesc
                 },
             isError = isError,
             colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.Transparent),

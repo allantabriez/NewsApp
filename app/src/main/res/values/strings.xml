@@ -22,4 +22,7 @@
     <string name="home_description">See What\'s Happening in the World</string>
     <string name="email_is_not_valid">Email is not valid</string>
     <string name="content_desc_email_input">Email Input</string>
+    <string name="content_pass_input">Password Input</string>
+    <string name="content_error_dialog">Error Dialog</string>
+    <string name="content_home_screen">Home Screen</string>
 </resources>
