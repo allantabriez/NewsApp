@@ -1,4 +1,4 @@
-package com.example.newsapp.presentation.login
+package com.example.newsapp.presentation
 
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.test.*
