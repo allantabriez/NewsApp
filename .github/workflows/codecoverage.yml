@@ -26,7 +26,8 @@ jobs:
         uses: ReactiveCircus/android-emulator-runner@v2.14.3
         with: 
             api-level: 29
-            script: ./gradlew connectedCheck 
+            script: ./gradlew testDebugUnitTest
+#             script: ./gradlew connectedCheck 
 
        # run: ./gradlew testDebugUnitTest
 
