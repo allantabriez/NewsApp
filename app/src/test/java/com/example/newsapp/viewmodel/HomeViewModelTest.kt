@@ -57,7 +57,7 @@ class HomeViewModelTest {
     @Test
     fun `getData fails returns Resource Error`() = mainCoroutineRule.runBlockingTest {
         Mockito.`when`(newsUseCase.invoke()).thenAnswer {
-            throw NetworkThrowable("Failed to lad data", ErrorCode.CodeUnknown)
+            throw NetworkThrowable("Failed to load data", ErrorCode.CodeUnknown)
         }
         Mockito.`when`(profileUseCase.invoke()).thenReturn(profile)
 

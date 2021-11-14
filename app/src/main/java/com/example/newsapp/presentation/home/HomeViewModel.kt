@@ -10,13 +10,14 @@ import com.example.newsapp.domain.model.Profile
 import com.example.newsapp.domain.usecase.GetNewsUseCase
 import com.example.newsapp.domain.usecase.GetProfileUseCase
 import com.example.newsapp.utils.DataMapper
-import com.example.newsapp.utils.EspressoIdlingResource
 import com.example.newsapp.utils.Resource
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val newsUseCase: GetNewsUseCase,
     private val profileUseCase: GetProfileUseCase,
+    private val increment: (() -> Unit)? = null,
+    private val decrement: (() -> Unit)? = null
 ) : ViewModel() {
 
     private val _state: MutableState<Resource<Pair<List<News>, Profile>>> =
@@ -27,20 +28,20 @@ class HomeViewModel(
         getData()
     }
 
-    private fun getData() {
-        EspressoIdlingResource.increment()
+    fun getData() {
+        increment?.invoke()
         _state.value = Resource.Loading()
         viewModelScope.launch {
             runCatching {
-                val newsResult = newsUseCase.invoke()
-                val profileResult = profileUseCase.invoke()
-                newsResult to profileResult
+                val newsResult = runCatching { newsUseCase.invoke() }
+                val profileResult = runCatching { profileUseCase.invoke() }
+                newsResult.getOrThrow() to profileResult.getOrThrow()
             }.onSuccess {
                 _state.value = Resource.Success(data = it)
-                EspressoIdlingResource.decrement()
+                decrement?.invoke()
             }.onFailure {
                 _state.value = DataMapper.handleError(it)
-                EspressoIdlingResource.decrement()
+                decrement?.invoke()
             }
         }
     }

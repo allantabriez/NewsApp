@@ -67,7 +67,7 @@ class HomeScreenTest {
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_profile_texts))
             .assertIsDisplayed()
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.profile_image))
-            .assertIsDisplayed()
+            .assertExists()
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_profile_texts))
             .assertIsDisplayed()
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_profile_app_bar))

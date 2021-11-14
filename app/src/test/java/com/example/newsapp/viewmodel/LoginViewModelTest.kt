@@ -3,7 +3,6 @@ package com.example.newsapp.viewmodel
 import com.example.newsapp.MainCoroutineRule
 import com.example.newsapp.data.DummyData
 import com.example.newsapp.data.remote.response.TokenResponse
-import com.example.newsapp.data.remote.response.toModel
 import com.example.newsapp.domain.usecase.LoginUseCase
 import com.example.newsapp.presentation.login.LoginViewModel
 import com.example.newsapp.utils.ErrorCode

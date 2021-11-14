@@ -4,7 +4,6 @@ import com.example.newsapp.data.DummyData
 import com.example.newsapp.data.LoginDataSource
 import com.example.newsapp.data.LoginRepositoryImpl
 import com.example.newsapp.data.remote.response.TokenResponse
-import com.example.newsapp.data.remote.response.toModel
 import com.example.newsapp.utils.DateUtils
 import com.example.newsapp.utils.ErrorCode
 import com.example.newsapp.utils.NetworkThrowable
