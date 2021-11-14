@@ -66,8 +66,6 @@ class HomeScreenTest {
             .assertIsDisplayed()
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_profile_texts))
             .assertIsDisplayed()
-        composeTestRule.onNodeWithContentDescription(activity.getString(R.string.profile_image))
-            .assertExists()
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_profile_texts))
             .assertIsDisplayed()
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_profile_app_bar))
@@ -82,10 +80,6 @@ class HomeScreenTest {
             .assertIsDisplayed()
         composeTestRule.onAllNodesWithContentDescription(activity.getString(R.string.content_news_card))
             .fetchSemanticsNodes().isNotEmpty()
-        composeTestRule.onAllNodesWithContentDescription(activity.getString(R.string.content_news_card))
-            .assertAll(
-                hasAnyChild(hasContentDescription(activity.getString(R.string.news_image)))
-            )
         composeTestRule.onAllNodesWithContentDescription(activity.getString(R.string.content_news_card))
             .assertAll(
                 hasAnyChild(hasContentDescription(activity.getString(R.string.content_news_title)))
