@@ -28,7 +28,7 @@ class HomeViewModel(
         getData()
     }
 
-    fun getData() {
+    private fun getData() {
         increment?.invoke()
         _state.value = Resource.Loading()
         viewModelScope.launch {
