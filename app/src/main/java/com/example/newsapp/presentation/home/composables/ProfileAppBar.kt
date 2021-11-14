@@ -10,6 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -23,10 +25,16 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun ProfileAppBar(profile: Profile) {
+    val profileDesc = stringResource(R.string.content_profile_app_bar)
+    val profileTextsDesc = stringResource(R.string.content_profile_texts)
     Surface(
         color = black,
         shape = RoundedCornerShape(bottomEnd = 24.dp),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .semantics {
+                contentDescription = profileDesc
+            }
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -39,12 +47,17 @@ fun ProfileAppBar(profile: Profile) {
                     .circleCrop(),
                 contentScale = ContentScale.FillBounds,
                 contentDescription = stringResource(R.string.profile_image),
-                modifier = Modifier.padding(start = 16.dp)
+                modifier = Modifier
+                    .padding(start = 16.dp)
                     .size(80.dp)
                     .aspectRatio(1f)
             )
             Column(
-                modifier = Modifier.padding(start = 24.dp, top = 26.dp, end = 16.dp, bottom = 26.dp)
+                modifier = Modifier
+                    .padding(start = 24.dp, top = 26.dp, end = 16.dp, bottom = 26.dp)
+                    .semantics {
+                        contentDescription = profileTextsDesc
+                    }
             ) {
                 Text(
                     text = profile.name,

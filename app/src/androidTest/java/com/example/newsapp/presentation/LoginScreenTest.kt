@@ -6,8 +6,6 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.rememberNavController
 import androidx.test.espresso.IdlingRegistry
 import com.example.newsapp.R
-import com.example.newsapp.presentation.MainActivity
-import com.example.newsapp.presentation.NewsAppNavHost
 import com.example.newsapp.presentation.navigation.NavDestinations
 import com.example.newsapp.presentation.theme.NewsAppTheme
 import com.example.newsapp.utils.EspressoIdlingResource
@@ -21,9 +19,11 @@ class LoginScreenTest {
 
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainActivity>()
+    private lateinit var activity: MainActivity
 
     @Before
     fun setup() {
+        activity = composeTestRule.activity
         IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource())
         composeTestRule.setContent {
             val controller = rememberNavController()
@@ -43,7 +43,6 @@ class LoginScreenTest {
 
     @Test
     fun checkUIOnly() {
-        val activity = composeTestRule.activity
         composeTestRule.onNodeWithText(activity.getString(R.string.login_title)).assertIsDisplayed()
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_desc_email_input)).assertIsDisplayed()
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_pass_input)).assertIsDisplayed()
@@ -52,7 +51,6 @@ class LoginScreenTest {
 
     @Test
     fun checkLoginError() {
-        val activity = composeTestRule.activity
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_desc_email_input)).performTextInput("tester")
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_pass_input)).performTextInput("tester")
         composeTestRule.onNodeWithText(activity.getString(R.string.login)).performClick()
@@ -61,7 +59,6 @@ class LoginScreenTest {
 
     @Test
     fun checkLoginSuccess() {
-        val activity = composeTestRule.activity
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_desc_email_input)).performTextInput("tester")
         composeTestRule.onNodeWithContentDescription(activity.getString(R.string.content_pass_input)).performTextInput("tester123")
         composeTestRule.onNodeWithText(activity.getString(R.string.login)).performClick()

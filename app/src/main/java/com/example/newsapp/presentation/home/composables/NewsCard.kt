@@ -11,6 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -25,11 +27,18 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun NewsCard(news: News) {
+    val cardDesc = stringResource(R.string.content_news_card)
+    val titleDesc = stringResource(R.string.content_news_title)
+    val actionDesc = stringResource(R.string.content_news_actions)
+    val dateDesc = stringResource(R.string.content_news_date)
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 16.dp),
+            .padding(top = 16.dp)
+            .semantics {
+                contentDescription = cardDesc
+            },
         elevation = 4.dp
     ) {
         Column(
@@ -51,7 +60,11 @@ fun NewsCard(news: News) {
                 maxLines = 2,
                 softWrap = true,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.padding(top = 4.dp, start = 12.dp, end = 12.dp),
+                modifier = Modifier
+                    .padding(top = 4.dp, start = 12.dp, end = 12.dp)
+                    .semantics {
+                        contentDescription = titleDesc
+                    },
                 style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.W700)
             )
             Row(
@@ -62,6 +75,9 @@ fun NewsCard(news: News) {
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.semantics {
+                        contentDescription = actionDesc
+                    }
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.icon_view),
@@ -126,7 +142,11 @@ fun NewsCard(news: News) {
                         color = darkerGrey,
                         fontWeight = FontWeight.W600,
                     ),
-                    modifier = Modifier.padding(start = 4.dp, end = 12.dp)
+                    modifier = Modifier
+                        .padding(start = 4.dp, end = 12.dp)
+                        .semantics {
+                            contentDescription = dateDesc
+                        }
                 )
             }
         }
