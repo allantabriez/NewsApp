@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlinx-serialization'
+    id 'jacoco'
 }
 
 def keystoreProperties = new Properties()
@@ -53,6 +54,7 @@ android {
             resValue "string", "app_version", "${defaultConfig.versionName}"
         }
         debug {
+            testCoverageEnabled true
             minifyEnabled false
             versionNameSuffix ".debug"
             resValue "string", "app_version", "${defaultConfig.versionName}${versionNameSuffix}"
