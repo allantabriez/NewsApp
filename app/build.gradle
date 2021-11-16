@@ -50,7 +50,7 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled true
             shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'retrofit.pro', 'okhttp.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'kotlinx-serialization.pro'
             resValue "string", "app_version", "${defaultConfig.versionName}"
         }
         debug {
