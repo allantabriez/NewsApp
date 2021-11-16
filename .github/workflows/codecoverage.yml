@@ -27,7 +27,9 @@ jobs:
           java-version: 11
 
       - name: Setup Keystore
-        run: base64 -d --input key-properties.b64 --output key.properties
+        run:
+          echo "${{ secrets.KEYSTORE }}" > key-properties.b64
+          base64 -d --input key-properties.b64 --output key.properties
 
       - name: Access BASEURL
         env:
