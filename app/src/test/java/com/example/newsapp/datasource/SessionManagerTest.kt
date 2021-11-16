@@ -28,7 +28,7 @@ class SessionManagerTest : KoinTest {
     }
 
     @Test
-    fun `save session`() {
+    fun `save session check that sharedPref edit is called`() {
         try {
             sessionManager.saveSession("", "")
         } catch (e: Exception) {}
@@ -36,21 +36,21 @@ class SessionManagerTest : KoinTest {
     }
 
     @Test
-    fun `retrieve token`() {
+    fun `retrieve token success returns expected token`() {
         Mockito.`when`(sharedPref.getString(SessionManager.TOKEN, "")).thenReturn(expectedToken)
         val token = sessionManager.getToken()
         assertEquals(expectedToken, token)
     }
 
     @Test
-    fun `retrieve expiry date`() {
+    fun `retrieve expiry date success returns expected date`() {
         Mockito.`when`(sharedPref.getString(SessionManager.EXPIRED_AT, "")).thenReturn(expectedDate)
         val date = sessionManager.getExpiredAt()
         assertEquals(expectedDate, date)
     }
 
     @Test
-    fun `delete session`() {
+    fun `delete session check that sharedPref all clear is called`() {
         try {
             sessionManager.deleteSession()
         } catch (e: Exception) {}

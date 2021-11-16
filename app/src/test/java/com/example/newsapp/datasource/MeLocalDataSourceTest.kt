@@ -38,14 +38,14 @@ class MeLocalDataSourceTest : KoinTest {
     }
 
     @Test
-    fun `insert profile`() = runBlockingTest {
+    fun `insert profile check that profileDao insertProfile is called`() = runBlockingTest {
         dataSource.insertProfile(DummyData.PROFILE_ENTITY)
 
         verify(profileDao, times(1)).insertProfile(DummyData.PROFILE_ENTITY)
     }
 
     @Test
-    fun `get profile`() = runBlockingTest {
+    fun `get profile success should return list with 1 expected profile`() = runBlockingTest {
         Mockito.`when`(profileDao.getProfile()).thenReturn(listOf(DummyData.PROFILE_ENTITY))
 
         val response = dataSource.getCachedProfile()
@@ -53,7 +53,7 @@ class MeLocalDataSourceTest : KoinTest {
     }
 
     @Test
-    fun `delete profile`() = runBlockingTest {
+    fun `delete profile check that profileDao deleteProfile is called`() = runBlockingTest {
         dataSource.deleteCachedProfile()
 
         verify(profileDao, times(1)).deleteProfile()
@@ -68,14 +68,14 @@ class MeLocalDataSourceTest : KoinTest {
     }
 
     @Test
-    fun `insert news`() = runBlockingTest {
+    fun `insert news check that newsDao insertNews is called`() = runBlockingTest {
         newsDao.insertNews(emptyList())
 
         verify(newsDao, times(1)).insertNews(emptyList())
     }
 
     @Test
-    fun `get news`() = runBlockingTest {
+    fun `get news success should return with expected list of news`() = runBlockingTest {
         Mockito.`when`(newsDao.getNews()).thenReturn(listOf(DummyData.NEWS_ENTITY))
 
         val response = dataSource.getCachedNews()
@@ -84,7 +84,7 @@ class MeLocalDataSourceTest : KoinTest {
     }
 
     @Test
-    fun `delete news`() = runBlockingTest {
+    fun `delete news check that newsDao deleteNews is called`() = runBlockingTest {
         newsDao.deleteNews()
 
         verify(newsDao, times(1)).deleteNews()
