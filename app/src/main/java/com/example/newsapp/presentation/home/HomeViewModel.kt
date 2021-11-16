@@ -16,8 +16,8 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val newsUseCase: GetNewsUseCase,
     private val profileUseCase: GetProfileUseCase,
-    private val increment: (() -> Unit)? = null,
-    private val decrement: (() -> Unit)? = null
+    private val increment: (() -> Unit) = {},
+    private val decrement: (() -> Unit) = {}
 ) : ViewModel() {
 
     private val _state: MutableState<Resource<Pair<List<News>, Profile>>> =
@@ -29,7 +29,7 @@ class HomeViewModel(
     }
 
     private fun getData() {
-        increment?.invoke()
+        increment.invoke()
         _state.value = Resource.Loading()
         viewModelScope.launch {
             runCatching {
@@ -38,10 +38,10 @@ class HomeViewModel(
                 newsResult.getOrThrow() to profileResult.getOrThrow()
             }.onSuccess {
                 _state.value = Resource.Success(data = it)
-                decrement?.invoke()
+                decrement.invoke()
             }.onFailure {
                 _state.value = DataMapper.handleError(it)
-                decrement?.invoke()
+                decrement.invoke()
             }
         }
     }

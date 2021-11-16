@@ -13,8 +13,8 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val useCase: LoginUseCase,
-    private val increment: (() -> Unit)? = null,
-    private val decrement: (() -> Unit)? = null,
+    private val increment: (() -> Unit) = {},
+    private val decrement: (() -> Unit) = {},
     ): ViewModel() {
     private val _state: MutableState<Resource<Token>> = mutableStateOf(Resource.Init())
     val state: State<Resource<Token>> get() = _state
@@ -44,17 +44,17 @@ class LoginViewModel(
     }
 
     fun doLogin() {
-        increment?.invoke()
+        increment.invoke()
         _state.value = Resource.Loading()
         viewModelScope.launch {
             runCatching {
                 useCase.invoke(_email.value, _password.value)
             }.onSuccess {
                 _state.value = Resource.Success(data = it)
-                decrement?.invoke()
+                decrement.invoke()
             }.onFailure {
                 _state.value = DataMapper.handleError(it)
-                decrement?.invoke()
+                decrement.invoke()
             }
         }
     }
