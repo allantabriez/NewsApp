@@ -35,10 +35,17 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
     ]))
 }
 
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
-if (keystorePropertiesFile.exists()) {
+//def keystoreProperties = new Properties()
+//def keystorePropertiesFile = rootProject.file('key.properties')
+//if (keystorePropertiesFile.exists()) {
+//    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+//}
+
+String getKeyProperties(String key) {
+    def keystoreProperties = new Properties()
+    def keystorePropertiesFile = rootProject.file('./key.properties')
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    return keystoreProperties[key]
 }
 
 String getBaseUrl() {
@@ -72,10 +79,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+            keyAlias getKeyProperties('keyAlias')
+            keyPassword getKeyProperties('keyPassword')
+            storeFile file(getKeyProperties('storeFile'))
+            storePassword getKeyProperties('storePassword')
         }
     }
 
