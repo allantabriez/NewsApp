@@ -28,8 +28,8 @@ jobs:
 
       - name: Access BASEURL
         env:
-          BASE_URL: ${{ secrets.BASEURL }}
-        run: echo baseUrl=\"$BASE_URL\" > ./local.properties
+          BASEURL: ${{ secrets.BASEURL }}
+        run: echo BASEURL=\"$BASEURL\" > ./local.properties
 
        # Execute unit tests
       - name: Unit Test with Android Emulator Runner

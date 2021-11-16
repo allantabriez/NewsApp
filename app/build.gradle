@@ -57,7 +57,7 @@ android {
         versionCode buildVersionCode
         versionName buildVersionName
 
-        buildConfigField("String", "BASE_URL", localProperties['baseUrl'])
+        buildConfigField("String", "BASE_URL", localProperties['BASEURL'])
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
