@@ -26,6 +26,11 @@ jobs:
         with:
           java-version: 11
 
+      - name: Access BASEURL
+        env:
+          BASE_URL: ${{ secrets.BASEURL }}
+        run: echo baseUrl=\"$BASE_URL\" > ./local.properties
+
        # Execute unit tests
       - name: Unit Test with Android Emulator Runner
         uses: ReactiveCircus/android-emulator-runner@v2.21.0
