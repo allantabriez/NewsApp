@@ -26,13 +26,16 @@ jobs:
         with:
           java-version: 11
 
+      - name: Setup Keystore
+        run: base64 -d --input key-properties.b64 --output key.properties
+
       - name: Access BASEURL
         env:
           BASEURL: ${{ secrets.BASEURL }}
         run: echo BASEURL=\"$BASEURL\" > ./local.properties
 
        # Execute unit tests
-      - name: Unit Test with Android Emulator Runner
+      - name: Unit Test and Instrument Test with Android Emulator Runner
         uses: ReactiveCircus/android-emulator-runner@v2.21.0
         with: 
             api-level: 29
