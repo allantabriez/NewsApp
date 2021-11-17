@@ -8,12 +8,13 @@ import com.example.newsapp.data.remote.LoginRemoteDataSource
 import com.example.newsapp.data.remote.MeRemoteDataSource
 import com.example.newsapp.domain.repository.LoginRepository
 import com.example.newsapp.domain.repository.MeRepository
+import com.example.newsapp.utils.DateUtils
 import org.koin.dsl.module
 
 val repositoryModule = module {
     single<LoginRepository> {
         LoginRepositoryImpl(
-            get<SessionManager>(), get<LoginRemoteDataSource>()
+            get<SessionManager>(), get<LoginRemoteDataSource>(), DateUtils
         )
     }
     single<MeRepository> {

@@ -17,6 +17,7 @@ class Application : Application() {
             modules(
                 listOf(
                     authInterceptModule,
+                    sharedPrefModule,
                     okhttpModule,
                     retrofitModule,
                     dataSourceModule,
