@@ -20,7 +20,7 @@
     <string name="password_is_not_valid">Password is not valid</string>
     <string name="home_title">Hot Topics</string>
     <string name="home_description">See What\'s Happening in the World</string>
-    <string name="email_is_not_valid">Email is not valid</string>
+    <string name="email_is_not_valid">Username is not valid</string>
     <string name="content_desc_email_input">Email Input</string>
     <string name="content_pass_input">Password Input</string>
     <string name="content_error_dialog">Error Dialog</string>

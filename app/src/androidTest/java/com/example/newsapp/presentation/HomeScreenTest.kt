@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.test.espresso.IdlingRegistry
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.example.newsapp.R
-import com.example.newsapp.presentation.navigation.NavDestinations
+import com.example.newsapp.presentation.navigations.NavDestinations
 import com.example.newsapp.presentation.theme.NewsAppTheme
 import com.example.newsapp.utils.EspressoIdlingResource
 import org.junit.After
