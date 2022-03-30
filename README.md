@@ -7,4 +7,4 @@ Tech Stacks used in this Project:
 - DI: Koin Injection
 - Networking: Retrofit + OkHttp
 - Local Storage: Room Database + EncryptedSharedPreference
-- CI: Code Coverage with JaCoCo
+- CI: Code Coverage with JaCoCo and Github Actions
