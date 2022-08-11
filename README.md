@@ -8,3 +8,4 @@ Tech Stacks used in this Project:
 - Networking: Retrofit + OkHttp
 - Local Storage: Room Database + EncryptedSharedPreference
 - CI: Code Coverage with JaCoCo and Github Actions
+
